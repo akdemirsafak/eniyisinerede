@@ -14,19 +14,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
 
-//builder.Services.Scan(scan => scan.FromAssemblyOf<CountryRepository>()
-//.AddClasses()
-//.AsImplementedInterfaces()
-//.WithScopedLifetime());
-
-//builder.Services.Scan(scan => scan.FromAssemblyOf<CountryService>()
-//    .AddClasses()
-//       .AsImplementedInterfaces()
-//          .WithScopedLifetime());
 
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<ICountryService, CountryService>();
 
+builder.Services.AddScoped<ICityRepository, CityRepository>();
+builder.Services.AddScoped<ICityService, CityService>();
 
 var app = builder.Build();
 
