@@ -1,9 +1,10 @@
 ﻿namespace eniyisinerede.API.Models
 {
-    public class Comment:BaseModel
+    public class Comment : BaseModel
     {
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
         public string Header { get; set; }
         public string Body { get; set; }
+        public int PalaceId { get; set; }
     }
 }
