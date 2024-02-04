@@ -1,42 +1,39 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace eniyisinerede.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
     {
-        // GET: api/Comment
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok();
         }
 
-        // GET: api/Comment/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            return "value";
+            return Ok();
         }
 
-        // POST: api/Comment
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Create()
         {
+            return Ok();
         }
 
-        // PUT: api/Comment/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Update()
         {
+            return Ok();
         }
 
-        // DELETE: api/Comment/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            return Ok();
         }
     }
 }
