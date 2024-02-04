@@ -5,15 +5,10 @@ using System.Data;
 
 namespace eniyisinerede.API.Repository;
 
-public class CountryRepository : ICountryRepository
+public class CountryRepository : BaseRepository, ICountryRepository
 {
-    private readonly IConfiguration _configuration;
-    private readonly IDbConnection _dbConnection; 
-    public CountryRepository(IConfiguration configuration)
+    public CountryRepository(IConfiguration configuration) : base(configuration)
     {
-        _configuration = configuration;
-        _dbConnection = new NpgsqlConnection(_configuration.GetConnectionString("DefaultConnection"));
-
     }
 
     public async Task<Country> CreateAsync(Country country)
