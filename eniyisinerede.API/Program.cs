@@ -1,5 +1,3 @@
-using eniyisinerede.API.Repository;
-using eniyisinerede.API.Service;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyModel;
 using Scrutor;
