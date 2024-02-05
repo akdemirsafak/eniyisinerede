@@ -1,4 +1,4 @@
-﻿using eniyisinerede.API.Models;
+﻿using eniyisinerede.API.Mappers.Cities;
 using eniyisinerede.API.Repository;
 using eniyisinerede.API.RequestModels.City;
 using eniyisinerede.API.ResponseModels.City;
@@ -8,7 +8,7 @@ namespace eniyisinerede.API.Service;
 public class CityService : ICityService
 {
     private readonly ICityRepository _cityRepository;
-
+    CityMapper mapper = new CityMapper();
     public CityService(ICityRepository cityRepository)
     {
         _cityRepository = cityRepository;
@@ -16,21 +16,9 @@ public class CityService : ICityService
 
     public async Task<CreatedCityResponse> CreateAsync(CreateCityRequest request)
     {
-        var city= new City
-        {
-            Name = request.Name,
-            CountryId = request.CountryId,
-            CreatedAt = DateTime.UtcNow
-        };
-        await _cityRepository.CreateAsync(city);
-        return new CreatedCityResponse
-        {
-            Id = city.Id,
-            Name = city.Name,
-            CountryId = city.CountryId,
-            CreatedAt = city.CreatedAt,
-            UpdatedAt = city.UpdatedAt
-        };
+        var city= mapper.CreateCityRequestToCity(request);
+        var createdCity=await _cityRepository.CreateAsync(city);
+        return mapper.CityToCreatedCityResponse(createdCity);
     }
 
     public async Task DeleteAsync(int id)
@@ -43,19 +31,8 @@ public class CityService : ICityService
     public async Task<List<CityResponse>> GetAllAsync()
     {
         var cities = await _cityRepository.GetAllAsync();
-        List<CityResponse> responseModel = new();
-        foreach (var city in cities)
-        {
-            responseModel.Add(new CityResponse
-            {
-                Id = city.Id,
-                Name = city.Name,
-                CountryId = city.CountryId,
-                CreatedAt = city.CreatedAt,
-                UpdatedAt = city.UpdatedAt
-            });
-        }
-        return responseModel;
+
+        return mapper.CitiesToCityListResponse(cities);
     }
 
     public async Task<CityResponse> GetByIdAsync(int id)
@@ -63,31 +40,14 @@ public class CityService : ICityService
         var city = await _cityRepository.GetByIdAsync(id);
         if (city == null)
             throw new Exception("City not found");
-        return new CityResponse
-        {
-            Id = city.Id,
-            Name = city.Name,
-            CountryId = city.CountryId,
-            CreatedAt = city.CreatedAt,
-            UpdatedAt = city.UpdatedAt
-        };
+        return mapper.CityToCityResponse(city);
     }
 
     public async Task<UpdatedCityResponse> UpdateAsync(int id, UpdateCityRequest request)
     {
-        var result = await _cityRepository.UpdateAsync(new City
-        {
-            Id = id,
-            Name = request.Name,
-            CountryId = request.CountryId
-        });
-        return new UpdatedCityResponse
-        {
-            Id = result.Id,
-            Name = result.Name,
-            CountryId = result.CountryId,
-            CreatedAt = result.CreatedAt,
-            UpdatedAt = result.UpdatedAt
-        };
+        var city = mapper.UpdateCityRequestToCity(request);
+        city.Id = id;
+        var result = await _cityRepository.UpdateAsync(city);
+        return mapper.CityToUpdatedCityResponse(result);
     }
 }
