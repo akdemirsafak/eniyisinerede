@@ -1,7 +1,7 @@
 ﻿using eniyisinerede.API.RequestModels.Country;
 using FluentValidation;
 
-namespace eniyisinerede.API.Validations;
+namespace eniyisinerede.API.Validations.Country;
 
 public class UpdateCountryRequestValidator : AbstractValidator<UpdateCountryRequest>
 {
