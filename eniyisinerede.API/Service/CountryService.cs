@@ -1,7 +1,7 @@
 ﻿using eniyisinerede.API.Mappers.Countries;
 using eniyisinerede.API.Repository;
-using eniyisinerede.API.RequestModels;
-using eniyisinerede.API.ResponseModels;
+using eniyisinerede.API.RequestModels.Country;
+using eniyisinerede.API.ResponseModels.Country;
 
 namespace eniyisinerede.API.Service;
 

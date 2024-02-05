@@ -1,7 +1,5 @@
 ﻿using eniyisinerede.API.Models;
-using eniyisinerede.API.RequestModels;
 using eniyisinerede.API.RequestModels.City;
-using eniyisinerede.API.ResponseModels;
 using eniyisinerede.API.ResponseModels.City;
 using Riok.Mapperly.Abstractions;
 

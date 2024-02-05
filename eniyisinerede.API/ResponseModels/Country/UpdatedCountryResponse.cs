@@ -1,6 +1,6 @@
-﻿namespace eniyisinerede.API.ResponseModels;
+﻿namespace eniyisinerede.API.ResponseModels.Country;
 
-public class CountryResponse
+public class UpdatedCountryResponse
 {
     public int Id { get; set; }
     public string Name { get; set; }

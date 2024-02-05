@@ -1,5 +1,5 @@
-﻿using eniyisinerede.API.RequestModels;
-using eniyisinerede.API.ResponseModels;
+﻿using eniyisinerede.API.RequestModels.Country;
+using eniyisinerede.API.ResponseModels.Country;
 
 namespace eniyisinerede.API.Service;
 

@@ -1,6 +1,6 @@
 ﻿using eniyisinerede.API.Models;
-using eniyisinerede.API.RequestModels;
-using eniyisinerede.API.ResponseModels;
+using eniyisinerede.API.RequestModels.Country;
+using eniyisinerede.API.ResponseModels.Country;
 using Riok.Mapperly.Abstractions;
 
 namespace eniyisinerede.API.Mappers.Countries;

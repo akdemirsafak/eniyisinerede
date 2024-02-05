@@ -1,4 +1,4 @@
-﻿using eniyisinerede.API.RequestModels;
+﻿using eniyisinerede.API.RequestModels.Country;
 using eniyisinerede.API.Service;
 using Microsoft.AspNetCore.Mvc;
 
