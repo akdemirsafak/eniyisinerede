@@ -1,41 +1,49 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using eniyisinerede.API.RequestModels.City;
+using eniyisinerede.API.Service;
+using Microsoft.AspNetCore.Mvc;
 
 namespace eniyisinerede.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class CityController : ControllerBase
     {
-        // GET: api/City
+        private readonly ICityService _cityService;
+
+        public CityController(ICityService cityService)
+        {
+            _cityService = cityService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(await _cityService.GetAllAsync());
         }
 
-        // GET: api/City/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            return "value";
+            return Ok(await _cityService.GetByIdAsync(id));
         }
 
-        // POST: api/City
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Create([FromBody] CreateCityRequest request)
         {
+            return Ok(await _cityService.CreateAsync(request));
         }
 
-        // PUT: api/City/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateCityRequest request)
         {
+            return Ok(await _cityService.UpdateAsync(id, request));
         }
 
-        // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            await _cityService.DeleteAsync(id);
+            return Ok();
         }
     }
 }

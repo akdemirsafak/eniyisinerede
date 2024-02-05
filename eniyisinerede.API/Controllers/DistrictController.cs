@@ -1,40 +1,48 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using eniyisinerede.API.RequestModels.District;
+using eniyisinerede.API.Service;
+using Microsoft.AspNetCore.Mvc;
 
 namespace eniyisinerede.API.Controllers;
 
-[Route("api/[controller]")]
+[Route("[controller]")]
 [ApiController]
 public class DistrictController : ControllerBase
 {
-    // GET: api/District
+    private readonly IDistrictService _districtService;
+
+    public DistrictController(IDistrictService districtService)
+    {
+        _districtService = districtService;
+    }
+
     [HttpGet]
-    public IEnumerable<string> Get()
+    public async Task<IActionResult> Get()
     {
-        return new string[] { "value1", "value2" };
+        return Ok(await _districtService.GetAllAsync());
     }
 
-    // GET: api/District/5
-    [HttpGet("{id}", Name = "Get")]
-    public string Get(int id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(int id)
     {
-        return "value";
+        return Ok(await _districtService.GetByIdAsync(id));
     }
 
-    // POST: api/District
     [HttpPost]
-    public void Post([FromBody] string value)
+    public async Task<IActionResult> Create([FromBody] CreateDistrictRequest request)
     {
+        return Ok(await _districtService.CreateAsync(request));
     }
 
-    // PUT: api/District/5
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    public async Task<IActionResult> Update(int id, [FromBody] UpdateDistrictRequest request)
     {
+        return Ok(await _districtService.UpdateAsync(id,request));
     }
 
-    // DELETE: api/ApiWithActions/5
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
+        await _districtService.DeleteAsync(id);
+        return Ok();
     }
 }

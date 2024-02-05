@@ -1,42 +1,48 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using eniyisinerede.API.RequestModels.Comment;
+using eniyisinerede.API.Service;
 using Microsoft.AspNetCore.Mvc;
 
-namespace eniyisinerede.API.Controllers
+namespace eniyisinerede.API.Controllers;
+
+[Route("[controller]")]
+[ApiController]
+public class CommentController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CommentController : ControllerBase
+    private readonly ICommentService _commentService;
+
+    public CommentController(ICommentService commentService)
     {
-        // GET: api/Comment
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        _commentService = commentService;
+    }
 
-        // GET: api/Comment/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+    [HttpGet]
+    public async Task<IActionResult> Get()
+    {
+        return Ok(await _commentService.GetAllAsync());
+    }
 
-        // POST: api/Comment
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        return Ok(await _commentService.GetByIdAsync(id));
+    }
 
-        // PUT: api/Comment/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CreateCommentRequest request)
+    {
+        return Ok(await _commentService.CreateAsync(request));
+    }
 
-        // DELETE: api/Comment/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, [FromBody] UpdateCommentRequest request)
+    {
+        return Ok(await _commentService.UpdateAsync(id, request));
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await _commentService.DeleteAsync(id);
+        return Ok();
     }
 }
