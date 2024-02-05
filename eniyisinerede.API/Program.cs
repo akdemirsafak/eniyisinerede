@@ -1,6 +1,9 @@
 using eniyisinerede.API.Repository;
 using eniyisinerede.API.Service;
 using FluentValidation.AspNetCore;
+using Microsoft.Extensions.DependencyModel;
+using Scrutor;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,14 +18,19 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
 
 
-builder.Services.AddScoped<ICountryRepository, CountryRepository>();
-builder.Services.AddScoped<ICountryService, CountryService>();
 
-builder.Services.AddScoped<ICityRepository, CityRepository>();
-builder.Services.AddScoped<ICityService, CityService>();
+var assemblies = DependencyContext.Default.RuntimeLibraries
+    .Where(library => library.Name.StartsWith("eniyisinerede"))
+    .Select(library => Assembly.Load(new AssemblyName(library.Name)))
+    .ToList();
 
-builder.Services.AddScoped<IDistrictRepository, DistrictRepository>();
-builder.Services.AddScoped<IDistrictService, DistrictService>();
+builder.Services.Scan(scan => scan.FromAssemblies(assemblies)
+                          .AddClasses()
+                          .UsingRegistrationStrategy(RegistrationStrategy.Skip)
+                          .AsMatchingInterface()
+                          .WithScopedLifetime());
+
+
 
 var app = builder.Build();
 
