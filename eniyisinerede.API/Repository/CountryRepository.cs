@@ -39,7 +39,8 @@ public class CountryRepository : BaseRepository, ICountryRepository
 
     public async Task<Country> GetByIdAsync(int id)
     {
-        var country = await _dbConnection.QueryFirstOrDefaultAsync<Country>("SELECT * FROM country where id=@id", id);
+        var query="SELECT * FROM country WHERE id=@id";
+        var country = await _dbConnection.QuerySingleOrDefaultAsync<Country>(query,new{id});
         return country;
     }
 

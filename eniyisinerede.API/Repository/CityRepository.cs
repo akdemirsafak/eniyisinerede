@@ -21,7 +21,7 @@ public class CityRepository : BaseRepository, ICityRepository
         DynamicParameters parameters = new();
         parameters.Add("Name", city.Name,DbType.String);
         parameters.Add("CountryId", city.CountryId);
-        parameters.Add("CreatedAt",city.CreatedAt,DbType.DateTime);
+        parameters.Add("CreatedAt",DateTime.UtcNow,DbType.DateTime);
         return await _dbConnection.QueryFirstAsync<City>(cmd, parameters);
     }
 
@@ -54,7 +54,7 @@ public class CityRepository : BaseRepository, ICityRepository
         var dynamicParameters = new DynamicParameters();
         dynamicParameters.Add("Name", city.Name,DbType.String);
         dynamicParameters.Add("CountryId", city.CountryId);
-        dynamicParameters.Add("UpdatedAt", city.UpdatedAt,DbType.DateTime);
+        dynamicParameters.Add("UpdatedAt", DateTime.UtcNow, DbType.DateTime);
         dynamicParameters.Add("Id", city.Id);
         return await _dbConnection.QueryFirstOrDefaultAsync<City>(cmd, dynamicParameters);
     }
