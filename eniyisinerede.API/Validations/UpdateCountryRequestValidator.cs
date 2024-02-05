@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace eniyisinerede.API.Validations;
 
-public class UpdateCountryRequestValidator:AbstractValidator<UpdateCountryRequest>
+public class UpdateCountryRequestValidator : AbstractValidator<UpdateCountryRequest>
 {
     public UpdateCountryRequestValidator()
     {

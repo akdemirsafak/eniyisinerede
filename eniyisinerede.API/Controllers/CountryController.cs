@@ -19,7 +19,7 @@ public class CountryController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        
+
         return Ok(await _countryService.GetAllAsync());
     }
 
@@ -33,8 +33,8 @@ public class CountryController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateCountryRequest request)
     {
-        
-       
+
+
         return Ok(await _countryService.CreateAsync(request));
     }
 

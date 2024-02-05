@@ -24,7 +24,7 @@ public class CityService : ICityService
     public async Task DeleteAsync(int id)
     {
         var result=await _cityRepository.DeleteAsync(id);
-        if(result==0)
+        if (result == 0)
             throw new Exception("City not found");
     }
 

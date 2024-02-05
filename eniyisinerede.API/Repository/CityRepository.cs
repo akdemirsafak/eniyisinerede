@@ -13,15 +13,15 @@ public class CityRepository : BaseRepository, ICityRepository
     public async Task<City> CreateAsync(City city)
     {
         var checkCountry = await _dbConnection.ExecuteScalarAsync<int>("SELECT Count(*) FROM country WHERE id=@id", new { id=city.CountryId });
-        if(checkCountry==0)
+        if (checkCountry == 0)
             throw new Exception("Country not found");
 
 
         string cmd="INSERT INTO city (name, countryid,createdat) VALUES (@Name, @CountryId,@CreatedAt) RETURNING *";
         DynamicParameters parameters = new();
-        parameters.Add("Name", city.Name,DbType.String);
+        parameters.Add("Name", city.Name, DbType.String);
         parameters.Add("CountryId", city.CountryId);
-        parameters.Add("CreatedAt",DateTime.UtcNow,DbType.DateTime);
+        parameters.Add("CreatedAt", DateTime.UtcNow, DbType.DateTime);
         return await _dbConnection.QueryFirstAsync<City>(cmd, parameters);
     }
 
@@ -52,7 +52,7 @@ public class CityRepository : BaseRepository, ICityRepository
 
         var cmd = "UPDATE city SET name=@Name, countryid=@CountryId, updatedat=@UpdatedAt WHERE id=@Id returning *";
         var dynamicParameters = new DynamicParameters();
-        dynamicParameters.Add("Name", city.Name,DbType.String);
+        dynamicParameters.Add("Name", city.Name, DbType.String);
         dynamicParameters.Add("CountryId", city.CountryId);
         dynamicParameters.Add("UpdatedAt", DateTime.UtcNow, DbType.DateTime);
         dynamicParameters.Add("Id", city.Id);

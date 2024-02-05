@@ -10,8 +10,8 @@ public partial class DistrictMapper
 {
     public partial DistrictResponse DistrictToDistrictResponse(District district);
     public partial List<DistrictResponse> DistrictsToDistrictListResponse(List<District> districts);
-    
-    
+
+
     public partial District CreateDistrictRequestToDistrict(CreateDistrictRequest createDistrictRequest);
     public partial CreatedDistrictResponse DistrictToCreatedDistrictResponse(District district);
 

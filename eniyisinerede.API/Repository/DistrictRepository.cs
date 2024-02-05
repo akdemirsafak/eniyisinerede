@@ -49,7 +49,7 @@ public class DistrictRepository : BaseRepository, IDistrictRepository
         dynamicParameters.Add("Name", district.Name);
         dynamicParameters.Add("ZipCode", district.ZipCode);
         dynamicParameters.Add("CityId", district.CityId);
-        dynamicParameters.Add("UpdatedAt", DateTime.UtcNow,System.Data.DbType.DateTime);
+        dynamicParameters.Add("UpdatedAt", DateTime.UtcNow, System.Data.DbType.DateTime);
         dynamicParameters.Add("Id", district.Id);
 
         return await _dbConnection.QueryFirstOrDefaultAsync<District>(cmd, dynamicParameters);

@@ -17,7 +17,7 @@ public partial class CityMapper
     //Create
 
 
-    public partial City CreateCityRequestToCity(CreateCityRequest createCityRequest);    
+    public partial City CreateCityRequestToCity(CreateCityRequest createCityRequest);
     public partial CreatedCityResponse CityToCreatedCityResponse(City city);
 
     //Update

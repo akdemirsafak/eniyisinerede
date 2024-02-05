@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using eniyisinerede.API.Models;
-using Npgsql;
 using System.Data;
 
 namespace eniyisinerede.API.Repository;
@@ -14,15 +13,15 @@ public class CountryRepository : BaseRepository, ICountryRepository
     public async Task<Country> CreateAsync(Country country)
     {
 
-            //var cmd = "INSERT INTO country (name,code) VALUES (@Name,@Code) returning *;";
-            var cmd = @"INSERT INTO country (name,code,createdat) VALUES (@Name,@Code,@CreatedAt) returning *";
-            var dynamicParameters = new DynamicParameters();
-            dynamicParameters.Add("Name", country.Name);
-            dynamicParameters.Add("Code", country.Code);
-            dynamicParameters.Add("CreatedAt", DateTime.UtcNow, DbType.DateTime);
-            var result=await _dbConnection.QueryFirstAsync<Country>(cmd, dynamicParameters);
+        //var cmd = "INSERT INTO country (name,code) VALUES (@Name,@Code) returning *;";
+        var cmd = @"INSERT INTO country (name,code,createdat) VALUES (@Name,@Code,@CreatedAt) returning *";
+        var dynamicParameters = new DynamicParameters();
+        dynamicParameters.Add("Name", country.Name);
+        dynamicParameters.Add("Code", country.Code);
+        dynamicParameters.Add("CreatedAt", DateTime.UtcNow, DbType.DateTime);
+        var result=await _dbConnection.QueryFirstAsync<Country>(cmd, dynamicParameters);
 
-            return result;
+        return result;
     }
 
     public async Task<int> DeleteAsync(int id)
