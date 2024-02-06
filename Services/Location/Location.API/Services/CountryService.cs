@@ -2,6 +2,7 @@
 using Location.API.Repositories;
 using Location.API.RequestModels.Country;
 using Location.API.ResponseModels.Country;
+using SharedLibrary.Dtos;
 
 namespace Location.API.Services;
 
@@ -15,46 +16,46 @@ public class CountryService : ICountryService
         _countryRepository = countryRepository;
     }
 
-    public async Task<CreatedCountryResponse> CreateAsync(CreateCountryRequest request)
+    public async Task<ApiResponse<CreatedCountryResponse>> CreateAsync(CreateCountryRequest request)
     {
         var country= mapper.CreateCountryRequestToCountry(request);
 
         var createdCountry = await _countryRepository.CreateAsync(country);
 
-        return mapper.CountryToCreatedCountryResponse(createdCountry);
+        return ApiResponse<CreatedCountryResponse>.Success(mapper.CountryToCreatedCountryResponse(createdCountry), 201);
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task<ApiResponse<NoContent>> DeleteAsync(int id)
     {
         var result = await _countryRepository.DeleteAsync(id);
         if (result == 0)
-        {
             throw new Exception("Country not found");
-        }
+
+        return ApiResponse<NoContent>.Success(204);
     }
 
-    public async Task<List<CountryResponse>> GetAllAsync()
+    public async Task<ApiResponse<List<CountryResponse>>> GetAllAsync()
     {
         var countries = await _countryRepository.GetAllAsync();
 
-        return mapper.CountriesToCountryListResponse(countries);
-
+        return ApiResponse<List<CountryResponse>>.Success(mapper.CountriesToCountryListResponse(countries));
     }
 
-    public async Task<CountryResponse> GetByIdAsync(int id)
+    public async Task<ApiResponse<CountryResponse>> GetByIdAsync(int id)
     {
         var country = await _countryRepository.GetByIdAsync(id);
         if (country is null)
             throw new Exception("Country not found");
 
-        return mapper.CountryToCountryResponse(country);
+        return ApiResponse<CountryResponse>.Success(mapper.CountryToCountryResponse(country));
     }
 
-    public async Task<UpdatedCountryResponse> UpdateAsync(int id, UpdateCountryRequest request)
+    public async Task<ApiResponse<UpdatedCountryResponse>> UpdateAsync(int id, UpdateCountryRequest request)
     {
         var country= mapper.UpdateCountryRequestToCountry(request);
         country.Id = id;
         var updatedCountry = await _countryRepository.UpdateAsync(country);
-        return mapper.CountryToUpdatedCountryResponse(updatedCountry);
+
+        return ApiResponse<UpdatedCountryResponse>.Success(mapper.CountryToUpdatedCountryResponse(updatedCountry));
     }
 }

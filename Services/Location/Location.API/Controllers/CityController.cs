@@ -1,12 +1,11 @@
 ﻿using Location.API.RequestModels.City;
 using Location.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using SharedLibrary.Controllers;
 
 namespace Location.API.Controllers;
 
-[Route("[controller]")]
-[ApiController]
-public class CityController : ControllerBase
+public class CityController : CustomBaseController
 {
     private readonly ICityService _cityService;
 
@@ -18,31 +17,30 @@ public class CityController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        return Ok(await _cityService.GetAllAsync());
+        return CreateActionResult(await _cityService.GetAllAsync());
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        return Ok(await _cityService.GetByIdAsync(id));
+        return CreateActionResult(await _cityService.GetByIdAsync(id));
     }
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateCityRequest request)
     {
-        return Ok(await _cityService.CreateAsync(request));
+        return CreateActionResult(await _cityService.CreateAsync(request));
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] UpdateCityRequest request)
     {
-        return Ok(await _cityService.UpdateAsync(id, request));
+        return CreateActionResult(await _cityService.UpdateAsync(id, request));
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        await _cityService.DeleteAsync(id);
-        return Ok();
+        return CreateActionResult(await _cityService.DeleteAsync(id));
     }
 }

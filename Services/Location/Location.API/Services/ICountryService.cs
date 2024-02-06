@@ -1,15 +1,16 @@
 ﻿using Location.API.RequestModels.Country;
 using Location.API.ResponseModels.Country;
+using SharedLibrary.Dtos;
 
 namespace Location.API.Services;
 
 
 public interface ICountryService
 {
-    Task<List<CountryResponse>> GetAllAsync();
-    Task<CountryResponse> GetByIdAsync(int id);
-    Task<CreatedCountryResponse> CreateAsync(CreateCountryRequest request);
-    Task<UpdatedCountryResponse> UpdateAsync(int id, UpdateCountryRequest request);
-    Task DeleteAsync(int id);
+    Task<ApiResponse<List<CountryResponse>>> GetAllAsync();
+    Task<ApiResponse<CountryResponse>> GetByIdAsync(int id);
+    Task<ApiResponse<CreatedCountryResponse>> CreateAsync(CreateCountryRequest request);
+    Task<ApiResponse<UpdatedCountryResponse>> UpdateAsync(int id, UpdateCountryRequest request);
+    Task<ApiResponse<NoContent>> DeleteAsync(int id);
 
 }
