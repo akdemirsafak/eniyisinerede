@@ -1,12 +1,12 @@
 ﻿using Location.API.RequestModels.District;
 using Location.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using SharedLibrary.Controllers;
 
 namespace Location.API.Controllers;
 
-[Route("[controller]")]
-[ApiController]
-public class DistrictController : ControllerBase
+
+public class DistrictController : CustomBaseController
 {
     private readonly IDistrictService _districtService;
 
@@ -18,31 +18,30 @@ public class DistrictController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        return Ok(await _districtService.GetAllAsync());
+        return CreateActionResult(await _districtService.GetAllAsync());
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        return Ok(await _districtService.GetByIdAsync(id));
+        return CreateActionResult(await _districtService.GetByIdAsync(id));
     }
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateDistrictRequest request)
     {
-        return Ok(await _districtService.CreateAsync(request));
+        return CreateActionResult(await _districtService.CreateAsync(request));
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] UpdateDistrictRequest request)
     {
-        return Ok(await _districtService.UpdateAsync(id,request));
+        return CreateActionResult(await _districtService.UpdateAsync(id, request));
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        await _districtService.DeleteAsync(id);
-        return Ok();
+        return CreateActionResult(await _districtService.DeleteAsync(id));
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace SharedLibrary.Dtos
 {
-    internal class NoContent
+    public class NoContent
     {
     }
 }
