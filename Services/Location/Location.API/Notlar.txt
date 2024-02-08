@@ -1,0 +1,21 @@
+Countries Table :
+id serial primary key,
+name character varying(32),
+code character varying nullable,
+createdat timestamp with time zone,
+updatedat timestamp with time zone
+
+Cities Table :
+id serial primary key,
+name character varying(32),
+countryid integer foreign key,
+createdat timestamp with time zone,
+updatedat timestamp with time zone
+
+Districts Table :
+id serial primary key,
+name character varying(32) notnull,
+zipcode character varying nullable,
+cityid integer foreign key,
+createdat timestamp with time zone,
+updatedat timestamp with time zone

@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  locationdb:
+    image: postgres
+
+  placedb:
+    image: mongo
+  
+  identitydb:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+
+  identityserver.api:
+    image: eniyisinerede.identityserver.api
+    build:
+      context: .
+      dockerfile: IdentityServer/eniyisineredeIdentityServer/Dockerfile
+
+  location.api:
+    image: eniyisinerede.location.api
+    build:
+      context: .
+      dockerfile: Services/Location/Location.API/Dockerfile
+
+
+  place.api:
+    image: eniyisinerede.place.api
+    build:
+      context: .
+      dockerfile: Services/Place/Place.API/Dockerfile
+
+
+volumes:
+  locationdb_volume:
+  identitydb_volume:
+  placedb_volume:
+    
