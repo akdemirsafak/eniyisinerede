@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+    locationdb:
+        container_name: locationdb
+        restart: always
+        ports:
+        - "6789:5432"
+        environment:
+            POSTGRES_USER : postgres
+            POSTGRES_PASSWORD : postgres
+            POSTGRES_DB : eniyisiNeredeDB
+        volumes:
+            - locationdb_volume:/var/lib/postgresql/data
+    
+    identitydb:
+        container_name: identitydb
+        restart: always
+        ports:
+        - "1234:1433"
+        environment:
+            MSSQL_SA_PASSWORD: "Password1234"
+            ACCEPT_EULA: "Y"
+        volumes:
+            - identityDb_volume:/var/opt/mssql
+    
+    location.api:
+        container_name: location.api
+        ports:
+        - "5011:443"
+        environment:
+           - IdentityServerUrl=http://identityserver.api
+           - ASPNETCORE_ENVIRONMENT=Development
+           - "ConnectionStrings:DefaultConnection=Server=localhost; Port=6789;Database=eniyisiNeredeDB;User Id=postgres;Password=postgres;"
+
+    identityserver.api:
+        container_name: identityserver.api
+        restart : on-failure
+        ports:
+        - "6000:443"
+        environment:
+           - ASPNETCORE_ENVIRONMENT=Development
+           - "ConnectionStrings:DefaultConnection=Server=localhost; Port=1234;Database=eniyisiNeredeIdentityDB;User Id=sa;Password=Password1234;"

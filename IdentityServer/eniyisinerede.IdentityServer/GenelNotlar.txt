@@ -1,0 +1,13 @@
+﻿IdentityServer4 notlar:
+
+
+https://github.com/IdentityServer/IdentityServer4.Templates
+
+
+1. Yukarıdaki linkten IdentityServer4.Templates indirilir.
+2. Readme'de belirtilen şekilde terminalde  "dotnet new -i identityserver4.templates" komutu çalıştırılır.
+3. IdentityServer'ı kuracağımız klasöre gidelim ve "dotnet new is4aspid" komutu çalıştıralım.
+dotnet new is4aspid => bu komut Readme'de belirtilen ve ihtiyaçlarımızı karşılayan bir IdentityServer4 projesi oluşturur.
+
+
+mcr.microsoft.com/mssql/server:2022-latest
