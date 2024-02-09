@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using Location.Service.Application.Commands.Cities.Create;
 using Microsoft.Extensions.DependencyModel;
 using Scrutor;
 using System.Reflection;
@@ -12,6 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddMediatR(cfg => {
+    cfg.RegisterServicesFromAssemblyContaining(typeof(CreateCityCommand));
+});
 
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
 

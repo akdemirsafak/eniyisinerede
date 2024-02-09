@@ -8,16 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.1.28" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-    <PackageReference Include="Npgsql" Version="8.0.1" />
-    <PackageReference Include="Riok.Mapperly" Version="3.3.0" />
     <PackageReference Include="Scrutor" Version="4.2.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\SharedLibrary\SharedLibrary.csproj" />
+    <ProjectReference Include="..\..\Location.Service\Location.Service.csproj" />
   </ItemGroup>
 
 </Project>
