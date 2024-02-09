@@ -8,6 +8,9 @@ services:
   
   identitydb:
     image: mcr.microsoft.com/mssql/server:2022-latest
+  
+  productdb:
+    image: mcr.microsoft.com/mssql/server:2022-latest
 
   identityserver.api:
     image: eniyisinerede.identityserver.api
@@ -28,9 +31,16 @@ services:
       context: .
       dockerfile: Services/Place/Place.API/Dockerfile
 
+  product.api:
+    image: eniyisinerede.product.api
+    build:
+      context: .
+      dockerfile: Services/Product/Product.API/Dockerfile
+
 
 volumes:
   locationdb_volume:
   identitydb_volume:
   placedb_volume:
+  productdb_volume:
     

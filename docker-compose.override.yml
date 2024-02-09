@@ -21,8 +21,19 @@ services:
             MSSQL_SA_PASSWORD: "Password1234"
             ACCEPT_EULA: "Y"
         volumes:
-            - identityDb_volume:/var/opt/mssql
-    
+            - identitydb_volume:/var/opt/mssql
+
+    productdb:
+        container_name: productdb
+        restart: always
+        ports:
+        - "5678:1433"
+        environment:
+            MSSQL_SA_PASSWORD: "Password1234"
+            ACCEPT_EULA: "Y"
+        volumes:
+            - productdb_volume:/var/opt/mssql
+
     placedb:
         container_name: placedb
         restart: always
@@ -46,7 +57,7 @@ services:
         container_name: identityserver.api
         restart : on-failure
         ports:
-        - "6000:443"
+        - "5050:443"
         environment:
            - ASPNETCORE_ENVIRONMENT=Development
            - "ConnectionStrings:DefaultConnection=Server=localhost; Port=1234;Database=eniyisiNeredeIdentityDB;User Id=sa;Password=Password1234;" 
@@ -62,3 +73,14 @@ services:
            - DatabaseSettings:ConnectionString=mongodb://localhost:27017
         depends_on:
            - placedb    
+    
+    product.api:
+        container_name: product.api
+        restart : on-failure
+        ports:
+        - "5012:443"
+        environment:
+           - ASPNETCORE_ENVIRONMENT=Development
+           - "ConnectionStrings:DefaultConnection=Server=localhost;Port=5678;Database=eniyisiNeredeProductDB;User Id=sa;Password=Password1234;" 
+        depends_on:
+           - productdb

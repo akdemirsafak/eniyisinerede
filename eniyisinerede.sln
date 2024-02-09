@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedLibrary", "Shared\Sha
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eniyisinerede.IdentityServer", "IdentityServer\eniyisinerede.IdentityServer\eniyisinerede.IdentityServer.csproj", "{875D3020-2568-4EF5-8204-65003967CD1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Place.API", "Services\Place\Place.API\Place.API.csproj", "{174C77B8-F73E-4851-ACDD-28948FF7FF1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Place.API", "Services\Place\Place.API\Place.API.csproj", "{174C77B8-F73E-4851-ACDD-28948FF7FF1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product.API", "Services\Product\Product.API\Product.API.csproj", "{10918478-530F-443E-9572-FC4DB486E7D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{174C77B8-F73E-4851-ACDD-28948FF7FF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{174C77B8-F73E-4851-ACDD-28948FF7FF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{174C77B8-F73E-4851-ACDD-28948FF7FF1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10918478-530F-443E-9572-FC4DB486E7D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10918478-530F-443E-9572-FC4DB486E7D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10918478-530F-443E-9572-FC4DB486E7D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10918478-530F-443E-9572-FC4DB486E7D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
