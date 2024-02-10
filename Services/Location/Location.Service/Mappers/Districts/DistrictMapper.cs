@@ -1,6 +1,6 @@
-﻿using Location.API.Models;
-using Location.API.RequestModels.District;
-using Location.API.ResponseModels.District;
+﻿using Location.Core.Entities;
+using Location.Model.RequestModels.District;
+using Location.Model.ResponseModels.District;
 using Riok.Mapperly.Abstractions;
 
 namespace Location.Service.Mappers.Districts;

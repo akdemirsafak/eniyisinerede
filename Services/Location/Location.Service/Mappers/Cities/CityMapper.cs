@@ -1,4 +1,9 @@
-﻿namespace Location.Service.Mappers.Cities;
+﻿using Location.Core.Entities;
+using Location.Model.RequestModels.City;
+using Location.Model.ResponseModels.City;
+using Riok.Mapperly.Abstractions;
+
+namespace Location.Service.Mappers.Cities;
 
 [Mapper]
 public partial class CityMapper

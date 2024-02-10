@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\SharedLibrary\SharedLibrary.csproj" />
-    <ProjectReference Include="..\..\Location.Service\Location.Service.csproj" />
+    <ProjectReference Include="..\Location.Service\Location.Service.csproj" />
   </ItemGroup>
 
 </Project>

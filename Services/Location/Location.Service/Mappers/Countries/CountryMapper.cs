@@ -1,6 +1,6 @@
-﻿using Location.API.Models;
-using Location.API.RequestModels.Country;
-using Location.API.ResponseModels.Country;
+﻿using Location.Core.Entities;
+using Location.Model.RequestModels.Country;
+using Location.Model.ResponseModels.Country;
 using Riok.Mapperly.Abstractions;
 
 namespace Location.Service.Mappers.Countries;
