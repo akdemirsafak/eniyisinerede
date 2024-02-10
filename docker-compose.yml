@@ -1,46 +1,55 @@
 version: "3.8"
 services:
-  locationdb:
-    image: postgres
+    locationdb:
+        image: postgres
 
-  placedb:
-    image: mongo
+    placedb:
+        image: mongo
   
-  identitydb:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    identitydb:
+        image: mcr.microsoft.com/mssql/server:2022-latest
   
-  productdb:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    productdb:
+        image: mcr.microsoft.com/mssql/server:2022-latest
 
-  identityserver.api:
-    image: eniyisinerede.identityserver.api
-    build:
-      context: .
-      dockerfile: IdentityServer/eniyisineredeIdentityServer/Dockerfile
+    reservationdb:
+        image: mcr.microsoft.com/mssql/server:2022-latest
 
-  location.api:
-    image: eniyisinerede.location.api
-    build:
-      context: .
-      dockerfile: Services/Location/Location.API/Dockerfile
+    identityserver.api:
+        image: eniyisinerede.identityserver.api
+        build:
+            context: .
+            dockerfile: IdentityServer/eniyisineredeIdentityServer/Dockerfile
+
+    location.api:
+        image: eniyisinerede.location.api
+        build:
+            context: .
+            dockerfile: Services/Location/Location.API/Dockerfile
 
 
-  place.api:
-    image: eniyisinerede.place.api
-    build:
-      context: .
-      dockerfile: Services/Place/Place.API/Dockerfile
+    place.api:
+        image: eniyisinerede.place.api
+        build:
+            context: .
+            dockerfile: Services/Place/Place.API/Dockerfile
 
-  product.api:
-    image: eniyisinerede.product.api
-    build:
-      context: .
-      dockerfile: Services/Product/Product.API/Dockerfile
+    product.api:
+        image: eniyisinerede.product.api
+        build:
+            context: .
+            dockerfile: Services/Product/Product.API/Dockerfile
+    reservation.api:
+        image: eniyisinerede.reservation.api
+        build:
+            context: .
+            dockerfile: Services/Reservation/Reservation.API/Dockerfile
 
 
 volumes:
-  locationdb_volume:
-  identitydb_volume:
-  placedb_volume:
-  productdb_volume:
+    locationdb_volume:
+    identitydb_volume:
+    placedb_volume:
+    productdb_volume:
+    reservationdb_volume:
     

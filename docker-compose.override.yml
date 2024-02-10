@@ -42,6 +42,17 @@ services:
         volumes:
             - placedb_volume:/data/db
     
+    reservationdb:
+        container_name: reservationdb
+        restart: always
+        ports:
+        - "1881:1433"
+        environment:
+            MSSQL_SA_PASSWORD: "Password1234"
+            ACCEPT_EULA: "Y"
+        volumes:
+            - productdb_volume:/var/opt/mssql
+
     location.api:
         container_name: location.api
         ports:
@@ -67,7 +78,7 @@ services:
     place.api:
         container_name: place.api
         ports:
-        - "5012:443"
+        - "5010:443"
         environment:
            - ASPNETCORE_ENVIRONMENT=Development
            - DatabaseSettings:ConnectionString=mongodb://localhost:27017
@@ -84,3 +95,14 @@ services:
            - "ConnectionStrings:DefaultConnection=Server=localhost;Port=5678;Database=eniyisiNeredeProductDB;User Id=sa;Password=Password1234;" 
         depends_on:
            - productdb
+    
+    reservation.api:
+        container_name: reservation.api
+        restart : on-failure
+        ports:
+        - "5013:443"
+        environment:
+           - ASPNETCORE_ENVIRONMENT=Development
+           - "ConnectionStrings:DefaultConnection=Server=localhost;Port=1881;Database=eniyisiNeredeReservationDB;User Id=sa;Password=Password1234;" 
+        depends_on:
+           - reservationdb
