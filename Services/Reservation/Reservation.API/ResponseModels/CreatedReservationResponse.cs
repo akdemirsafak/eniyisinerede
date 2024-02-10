@@ -1,6 +1,6 @@
 ﻿namespace Reservation.API.ResponseModels;
 
-public class CreatedReservationResponse:BaseResponse
+public class CreatedReservationResponse : BaseResponse
 {
     public DateTime DateAndTime { get; set; }
     public string? Notes { get; set; }

@@ -37,7 +37,7 @@ public class ReservationController : CustomBaseController
     {
         return CreateActionResult(await _reservationService.UpdateAsync(id, request));
     }
-    [HttpPut("CancellReservation/{id}")]
+    [HttpPut("[action]/{id}")]
     public async Task<IActionResult> CancellReservation(Guid id)
     {
         return CreateActionResult(await _reservationService.CancellAsync(id));

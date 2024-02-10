@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Reservation.API.DbContext;
-using Reservation.API.Entity;
 
 namespace Reservation.API.Repositories;
 
@@ -11,14 +10,6 @@ public class ReservationRepository : IReservationRepository
     public ReservationRepository(ApiDbContext dbContext)
     {
         _dbContext = dbContext;
-    }
-
-    public async Task CancellAsync(Guid id)
-    {
-        var reservation= await _dbContext.Reservations.SingleOrDefaultAsync(x=>x.Id==id);
-        reservation.Status = ReservationStatus.Cancelled;
-        _dbContext.Reservations.Update(reservation);
-        await _dbContext.SaveChangesAsync();
     }
 
     public async Task<Entity.Reservation> CreateAsync(Entity.Reservation reservation)

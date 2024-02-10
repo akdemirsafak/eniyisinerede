@@ -1,6 +1,7 @@
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Reservation.API.DbContext;
+using Reservation.API.Interceptors;
 using Reservation.API.Repositories;
 using Reservation.API.Services;
 using System.Reflection;
@@ -14,16 +15,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<AuditableEntitiesInterceptor>();
 
-builder.Services.AddDbContext<ApiDbContext>(opt =>
+builder.Services.AddDbContext<ApiDbContext>((sp, opt) =>
+{
+    var interceptor=sp.GetService<AuditableEntitiesInterceptor>()!;
+
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
     option => { option.MigrationsAssembly(Assembly.GetAssembly(typeof(ApiDbContext))!.GetName().Name); })
-);
+        .AddInterceptors(interceptor);
+});
 
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
-
-builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
 

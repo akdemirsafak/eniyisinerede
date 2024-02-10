@@ -1,6 +1,4 @@
-﻿using Reservation.API.Entity;
-
-namespace Reservation.API.RequestModels;
+﻿namespace Reservation.API.RequestModels;
 
 public record UpdateReservationRequest(
     Guid PlaceId,

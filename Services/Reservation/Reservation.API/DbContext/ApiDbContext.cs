@@ -9,5 +9,5 @@ public class ApiDbContext : Microsoft.EntityFrameworkCore.DbContext
     }
 
     public DbSet<Reservation.API.Entity.Reservation> Reservations { get; set; }
-    
+
 }

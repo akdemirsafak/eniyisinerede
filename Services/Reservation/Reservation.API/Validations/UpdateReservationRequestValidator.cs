@@ -3,7 +3,7 @@ using Reservation.API.RequestModels;
 
 namespace Reservation.API.Validations;
 
-public class UpdateReservationRequestValidator:AbstractValidator<UpdateReservationRequest>
+public class UpdateReservationRequestValidator : AbstractValidator<UpdateReservationRequest>
 {
     public UpdateReservationRequestValidator()
     {
@@ -18,7 +18,7 @@ public class UpdateReservationRequestValidator:AbstractValidator<UpdateReservati
         RuleFor(x => x.Notes).MaximumLength(128).WithMessage("Notes should be less than 128 characters");
 
         RuleFor(x => x.NumberOfPerson)
-            .Null().WithMessage("Number of person is required")
+            .NotNull().WithMessage("Number of person is required")
             .GreaterThan(0).WithMessage("Number of person should be greater than 0");
     }
 }

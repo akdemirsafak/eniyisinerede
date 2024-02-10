@@ -7,5 +7,4 @@ public interface IReservationRepository
     Task<Reservation.API.Entity.Reservation> CreateAsync(Reservation.API.Entity.Reservation reservation);
     Task<Reservation.API.Entity.Reservation> UpdateAsync(Reservation.API.Entity.Reservation reservation);
     Task DeleteAsync(Guid id);
-    Task CancellAsync(Guid id);
 }
