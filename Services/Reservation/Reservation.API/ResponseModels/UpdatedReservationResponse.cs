@@ -8,4 +8,5 @@ public class UpdatedReservationResponse : BaseResponse
     public string Status { get; set; }
     public int StatusId { get; set; }
     public int NumberOfPerson { get; set; }
+    public string PlaceId { get; set; }
 }

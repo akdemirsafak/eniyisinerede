@@ -20,5 +20,6 @@ public class CreateReservationRequestValidator : AbstractValidator<CreateReserva
         RuleFor(x => x.NumberOfPerson)
             .NotNull().WithMessage("Number of person is required")
             .GreaterThan(0).WithMessage("Number of person should be greater than 0");
+
     }
 }

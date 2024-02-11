@@ -2,9 +2,9 @@
 
 public class BaseResponse
 {
-    public Guid Id { get; set; }
+    public string Id { get; set; }
     public DateTime? CreatedAt { get; set; }
-    public Guid? CreatedById { get; set; }
+    public string? CreatedById { get; set; }
     public DateTime? UpdatedAt { get; set; }
-    public Guid? UpdatedById { get; set; }
+    public string? UpdatedById { get; set; }
 }

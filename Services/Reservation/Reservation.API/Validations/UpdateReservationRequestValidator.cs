@@ -20,5 +20,7 @@ public class UpdateReservationRequestValidator : AbstractValidator<UpdateReserva
         RuleFor(x => x.NumberOfPerson)
             .NotNull().WithMessage("Number of person is required")
             .GreaterThan(0).WithMessage("Number of person should be greater than 0");
+        RuleFor(x => x.StatusId)
+           .NotNull().WithMessage("StatusId is required");
     }
 }

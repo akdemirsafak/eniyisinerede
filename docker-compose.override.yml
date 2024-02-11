@@ -46,12 +46,9 @@ services:
         container_name: reservationdb
         restart: always
         ports:
-        - "1881:1433"
-        environment:
-            MSSQL_SA_PASSWORD: "Password1234"
-            ACCEPT_EULA: "Y"
+            - "27018:27017"
         volumes:
-            - productdb_volume:/var/opt/mssql
+            - reservationdb_volume:/data/db
 
     location.api:
         container_name: location.api

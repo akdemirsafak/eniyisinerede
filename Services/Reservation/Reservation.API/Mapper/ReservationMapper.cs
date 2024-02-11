@@ -7,28 +7,20 @@ namespace Reservation.API.Mapper;
 public partial class ReservationMapper
 {
     //CreateRequest mapping
-    [MapProperty(nameof(CreateReservationRequest.NumberOfPerson), nameof(Entity.Reservation.NumberOfPerson))]
-    public partial Entity.Reservation CreateReservationRequestToReservation(CreateReservationRequest createReservationRequest);
+    public partial Models.Reservation CreateReservationRequestToReservation(CreateReservationRequest createReservationRequest);
 
     //CreateResponse mapping
-    [MapProperty(nameof(CreatedReservationResponse.Status), nameof(Entity.Reservation.Status))]
-    [MapEnumValue(nameof(CreatedReservationResponse.StatusId), nameof(Entity.Reservation.Status))]
-    public partial CreatedReservationResponse ReservationToCreatedReservationResponse(Entity.Reservation reservation);
+    public partial CreatedReservationResponse ReservationToCreatedReservationResponse(Models.Reservation reservation);
 
     //Update Response Mapping
-    [MapProperty(nameof(UpdatedReservationResponse.Status), nameof(Entity.Reservation.Status))]
-    [MapEnumValue(nameof(UpdatedReservationResponse.StatusId), nameof(Entity.Reservation.Status))]
-    public partial UpdatedReservationResponse ReservationToUpdatedReservationResponse(Entity.Reservation reservation);
+    public partial UpdatedReservationResponse ReservationToUpdatedReservationResponse(Models.Reservation reservation);
 
 
     //Get Single Mapping
-    [MapEnumValue(nameof(ReservationResponse.StatusId), nameof(Entity.Reservation.Status))]
-    [MapProperty(nameof(ReservationResponse.Status), nameof(Entity.Reservation.Status))]
-    public partial ReservationResponse ReservationToReservationResponse(Entity.Reservation reservation);
+    public partial ReservationResponse ReservationToReservationResponse(Models.Reservation reservation);
 
 
     //GetAll Mapping
-    [MapEnumValue(nameof(ReservationResponse.StatusId), nameof(Entity.Reservation.Status))]
-    [MapProperty(nameof(ReservationResponse.Status), nameof(Entity.Reservation.Status))]
-    public partial List<ReservationResponse> ReservationsToReservationListResponse(List<Entity.Reservation> reservations);
+    [MapEnumValue(nameof(ReservationResponse.StatusId), nameof(Models.Reservation.Status))]
+    public partial List<ReservationResponse> ReservationsToReservationListResponse(List<Models.Reservation> reservations);
 }

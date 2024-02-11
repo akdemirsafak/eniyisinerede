@@ -1,19 +1,23 @@
-﻿namespace Reservation.API.Entity;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
-public class Reservation : IAuditableEntity
+namespace Reservation.API.Models;
+
+public class Reservation
 {
-    public Guid Id { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string Id { get; set; }
     public DateTime DateAndTime { get; set; }
     public string? Notes { get; set; }
     public string PhoneNumber { get; set; }
     public ReservationStatus Status { get; set; }
-
-    public Guid PlaceId { get; set; }
+    public string PlaceId { get; set; }
     public int NumberOfPerson { get; set; }
     public DateTime? CreatedAt { get; set; }
-    public Guid? CreatedById { get; set; }
+    public string? CreatedById { get; set; }
     public DateTime? UpdatedAt { get; set; }
-    public Guid? UpdatedById { get; set; }
+    public string? UpdatedById { get; set; }
 }
 public enum ReservationStatus
 {

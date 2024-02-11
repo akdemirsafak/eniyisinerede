@@ -1,7 +1,9 @@
-﻿namespace Reservation.API.RequestModels;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Reservation.API.RequestModels;
 
 public record CreateReservationRequest(
-    Guid PlaceId,
+    string PlaceId,
     DateTime DateAndTime,
     string? Notes,
     string PhoneNumber,

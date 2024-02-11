@@ -21,7 +21,7 @@ public class ReservationController : CustomBaseController
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(Guid id)
+    public async Task<IActionResult> GetById(string id)
     {
         return CreateActionResult(await _reservationService.GetByIdAsync(id));
     }
@@ -33,18 +33,18 @@ public class ReservationController : CustomBaseController
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateReservationRequest request)
+    public async Task<IActionResult> Update(string id, [FromBody] UpdateReservationRequest request)
     {
         return CreateActionResult(await _reservationService.UpdateAsync(id, request));
     }
     [HttpPut("[action]/{id}")]
-    public async Task<IActionResult> CancellReservation(Guid id)
+    public async Task<IActionResult> CancellReservation(string id)
     {
         return CreateActionResult(await _reservationService.CancellAsync(id));
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete(string id)
     {
         return CreateActionResult(await _reservationService.DeleteAsync(id));
     }

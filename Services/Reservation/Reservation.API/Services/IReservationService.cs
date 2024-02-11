@@ -7,9 +7,9 @@ namespace Reservation.API.Services;
 public interface IReservationService
 {
     Task<ApiResponse<List<ReservationResponse>>> GetAllAsync();
-    Task<ApiResponse<ReservationResponse>> GetByIdAsync(Guid id);
+    Task<ApiResponse<ReservationResponse>> GetByIdAsync(string id);
     Task<ApiResponse<CreatedReservationResponse>> CreateAsync(CreateReservationRequest createReservationRequest);
-    Task<ApiResponse<UpdatedReservationResponse>> UpdateAsync(Guid id, UpdateReservationRequest updateReservationRequest);
-    Task<ApiResponse<NoContent>> CancellAsync(Guid id);
-    Task<ApiResponse<NoContent>> DeleteAsync(Guid id);
+    Task<ApiResponse<UpdatedReservationResponse>> UpdateAsync(string id, UpdateReservationRequest updateReservationRequest);
+    Task<ApiResponse<ReservationResponse>> CancellAsync(string id);
+    Task<ApiResponse<NoContent>> DeleteAsync(string id);
 }
