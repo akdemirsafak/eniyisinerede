@@ -1,0 +1,37 @@
+﻿@model List<ProductViewModel>
+@{
+    ViewData["Title"] = "Products";
+}
+    <h3>Products here</h3>
+    @if (Model.Any())
+    {
+        <div class="row">
+            @foreach (var product in Model)
+        {
+            <div class="col-sm-4 col-md-4 col-4">
+                <div class="card-mb-3">
+                    <img src="@product.PictureUrl" alt="" class="card-img-top img-fluid">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">@product.Name</h5>
+                        <hr>
+                        <div class="text-dark d-block fw-bolder mb-3">
+                            <a href="">Boş bune</a>
+                        </div>
+                        <div class="card-text d-block">
+                            <p>@product.Description</p>
+                        </div>
+                        <h6 class="text-primary">productprice</h6>
+                        <div class="col">
+                            <a asp-controller="Home" asp-action="Detail" asp-route-id="@product.Id">
+                                <button class="btn btn-primary d-block btn-sm">Ayrıntılı bilgi</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+    }else
+    {
+        <p>No products found</p>
+    }

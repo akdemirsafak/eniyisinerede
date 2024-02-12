@@ -1,7 +1,21 @@
+using eniyisinerede.webui.Services;
+using eniyisinerede.webui.Services.Interfaces;
+using System.Runtime.CompilerServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped<IProductService, ProductService>();
+
+builder.Services.AddHttpClient<IProductService, ProductService>(options =>
+{
+    options.BaseAddress = new Uri("https://localhost:5012/api/");
+});
 
 var app = builder.Build();
 
