@@ -1,0 +1,17 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="card">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@Model.Name</h5>
+        </div>
+        <div class="card-body">
+            <img src="@Model.PictureUrl" alt="" class="card-img-top img-fluid">
+            <p class="card-text">@Model.Description</p>
+            <h6 class="text-primary">@Model.Price</h6>
+        </div>
+    </div>
+</div>

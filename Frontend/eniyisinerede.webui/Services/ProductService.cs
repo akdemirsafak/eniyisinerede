@@ -7,13 +7,6 @@ namespace eniyisinerede.webui.Services;
 
 public class ProductService : IProductService
 {
-    //private HttpClient _httpClient= new HttpClient { BaseAddress = new Uri("https://localhost:5012/api/") };
-
-    //public ProductService(HttpClient httpClient)
-    //{
-    //    _httpClient = httpClient;
-    //}
-
     private readonly HttpClient _httpClient;
 
     public ProductService(HttpClient httpClient)
@@ -21,19 +14,41 @@ public class ProductService : IProductService
         _httpClient = httpClient;
     }
 
-    public Task<bool> CreateAsync(CreateProductViewModel createProductViewModel)
+    public async Task<bool> CreateAsync(CreateProductViewModel createProductViewModel)
     {
-        throw new NotImplementedException();
+        var clientResult=await _httpClient.PostAsJsonAsync("product", createProductViewModel);
+        if(!clientResult.IsSuccessStatusCode)
+            return false;
+
+        var productViewModel = await clientResult.Content.ReadFromJsonAsync<ApiResponse<CreateProductViewModel>>();
+        
+        if(productViewModel.StatusCode!= StatusCodes.Status201Created)
+            return false;
+        
+        return true;
     }
 
-    public Task<bool> DeleteAsync(Guid productId)
+    public async Task<bool> DeleteAsync(Guid productId)
     {
-        throw new NotImplementedException();
+        var clientResult =await _httpClient.DeleteAsync($"product/{productId}");
+        if (!clientResult.IsSuccessStatusCode)
+            return false;
+        
+        var clientContent = await clientResult.Content.ReadFromJsonAsync<ApiResponse<NoContent>>();
+        if(clientContent.StatusCode!= StatusCodes.Status204NoContent)
+            return false;
+        
+        return true;
+
     }
 
-    public Task<ProductViewModel> GetAsync(Guid productId)
+    public async Task<ProductViewModel> GetAsync(Guid productId)
     {
-        throw new NotImplementedException();
+        var product= await _httpClient.GetAsync($"product/{productId}");
+        if (!product.IsSuccessStatusCode)
+            return null;
+        var productViewModel = await product.Content.ReadFromJsonAsync<ApiResponse<ProductViewModel>>();
+        return productViewModel.Data;
     }
 
     public async Task<List<ProductViewModel>> GetAllAsync()
@@ -45,8 +60,18 @@ public class ProductService : IProductService
         return productViewModel.Data;
     }
 
-    public Task<bool> UpdateAsync(UpdateProductViewModel updateProductViewModel)
+    public async Task<bool> UpdateAsync(UpdateProductViewModel updateProductViewModel)
     {
-        throw new NotImplementedException();
+        var clientResult =await _httpClient.PutAsJsonAsync($"product/{updateProductViewModel.Id}", updateProductViewModel);
+        
+        if (!clientResult.IsSuccessStatusCode)
+            return false;
+
+        var productViewModel = await clientResult.Content.ReadFromJsonAsync<ApiResponse<UpdateProductViewModel>>();
+        
+        if(productViewModel.StatusCode!= StatusCodes.Status200OK)
+            return false;
+        
+        return true;
     }
 }

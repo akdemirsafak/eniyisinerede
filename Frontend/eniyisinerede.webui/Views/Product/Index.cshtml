@@ -10,7 +10,7 @@
         {
             <div class="col-sm-4 col-md-4 col-4">
                 <div class="card-mb-3">
-                    <img src="@product.PictureUrl" alt="" class="card-img-top img-fluid">
+                    <img src="@product.PictureUrl" alt="" style="width:256px;height:256px;" class="card-img-top img-fluid">
                     <div class="card-body">
                         <h5 class="card-title mb-3">@product.Name</h5>
                         <hr>
@@ -20,7 +20,7 @@
                         <div class="card-text d-block">
                             <p>@product.Description</p>
                         </div>
-                        <h6 class="text-primary">productprice</h6>
+                        <h6 class="text-primary">@product.Price</h6>
                         <div class="col">
                             <a asp-controller="Home" asp-action="Detail" asp-route-id="@product.Id">
                                 <button class="btn btn-primary d-block btn-sm">Ayrıntılı bilgi</button>
