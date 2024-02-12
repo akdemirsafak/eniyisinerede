@@ -1,3 +1,30 @@
 @{
     ViewData["Title"] = "Update";
 }
+@model UpdateProductViewModel
+
+<h2 class="text-center">Update Product</h2>
+
+<form method="post" asp-controller="Product" asp-action="Create">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="Name">
+        <span asp-validation-for="Name" class="danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="Description">
+        <span asp-validation-for="Description" class="danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="Price">
+        <span asp-validation-for="Price" class="danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PictureUrl" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="PictureUrl">
+        <span asp-validation-for="Name" class="danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
