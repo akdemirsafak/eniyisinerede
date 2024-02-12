@@ -6,4 +6,4 @@ public record UpdateProductRequest(
     [Required, Length(1, 32)] string Name,
     string? Description,
     decimal Price,
-    string? Picture);
+    string? PictureUrl);

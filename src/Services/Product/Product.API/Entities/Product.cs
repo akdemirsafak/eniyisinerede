@@ -2,7 +2,7 @@
 
 namespace Product.API.Entities;
 
-public class Product
+public class Product : IAuditableEntity
 {
     public Guid Id { get; set; }
     [Required,Length(1,32)]
@@ -10,6 +10,8 @@ public class Product
     public string? Description { get; set; }
     public decimal Price { get; set; }
     public string? PictureUrl { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime? UpdatedAt { get; set; }
+    public DateTime CreatedAt { get ; set ; }
+    public string? CreatedBy { get ; set; }
+    public DateTime? UpdatedAt { get ; set ; }
+    public string? UpdatedBy { get ; set ; }
 }
