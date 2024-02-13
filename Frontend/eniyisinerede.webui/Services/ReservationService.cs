@@ -22,9 +22,9 @@ public class ReservationService : IReservationService
         //var response= await _httpClient.PutAsJsonAsync<ApiResponse<ReservationViewModel>>($"reservation/CancellReservation/{id}");
         if (!response.IsSuccessStatusCode)
             return false;
-        
+
         var result = await response.Content.ReadFromJsonAsync<ApiResponse<ReservationViewModel>>();
-        return true;  
+        return true;
     }
 
     public async Task<bool> CreateAsync(CreateReservationViewModel createReservationViewModel)
@@ -66,11 +66,11 @@ public class ReservationService : IReservationService
         return result.Data;
     }
 
-    public async Task<bool> UpdateAsync(string id, UpdateReservationViewModel updateReservationViewModel)
+    public async Task<bool> UpdateAsync(UpdateReservationViewModel updateReservationViewModel)
     {
-        var request = new HttpRequestMessage(HttpMethod.Put, $"reservation/{id}");
+        var request = new HttpRequestMessage(HttpMethod.Put, $"reservation/{updateReservationViewModel.Id}");
         request.Content = new StringContent(JsonSerializer.Serialize(updateReservationViewModel), Encoding.UTF8, "application/json");
-        
+
         var response = await _httpClient.SendAsync(request);
 
         //var requestResponse = await _httpClient.PutAsJsonAsync<ApiResponse<ReservationViewModel>>($"reservation/{id}", updateReservationViewModel);

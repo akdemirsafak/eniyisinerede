@@ -3,7 +3,7 @@ using eniyisinerede.webui.ViewModels.Reservations;
 
 namespace eniyisinerede.webui.Mappers.Reservations;
 
-public class ReservationMapper:Profile
+public class ReservationMapper : Profile
 {
     public ReservationMapper()
     {

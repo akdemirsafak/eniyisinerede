@@ -4,7 +4,7 @@ namespace eniyisinerede.webui.ViewModels.Products;
 
 public class CreateProductViewModel
 {
-    [Required,Length(1,32)]
+    [Required, Length(1, 32)]
     [Display(Name = "Ürün adı")]
     public string Name { get; set; }
     [Display(Name = "Açıklama")]
