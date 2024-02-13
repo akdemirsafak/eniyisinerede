@@ -1,4 +1,3 @@
-using eniyisinerede.webui.ViewModels;
 using eniyisinerede.webui.ViewModels.Products;
 
 namespace eniyisinerede.webui.Services.Interfaces;

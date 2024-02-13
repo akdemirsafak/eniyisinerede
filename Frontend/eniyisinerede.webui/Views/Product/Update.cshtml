@@ -3,9 +3,11 @@
 }
 @model UpdateProductViewModel
 
+<div class="container">
+
 <h2 class="text-center">Update Product</h2>
 
-<form method="post" asp-controller="Product" asp-action="Create">
+<form method="post" asp-action="UpdateProduct">
     <div class="mb-3">
         <label asp-for="Name" class="form-label"></label>
         <input type="text" class="form-control" asp-for="Name">
@@ -26,5 +28,8 @@
         <input type="text" class="form-control" asp-for="PictureUrl">
         <span asp-validation-for="Name" class="danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">güncelle</button>
 </form>
+
+<a class="text-primary" asp-action="ProductDetails" asp-route-id="@Model.Id"> Güncellemeyi iptal et ve ürün bilgilerine geri dön.</a>
+</div>

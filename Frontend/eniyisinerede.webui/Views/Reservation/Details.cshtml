@@ -1,0 +1,32 @@
+﻿@model ReservationViewModel
+@{
+    ViewData["Title"] = "Reservation";
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-center card-title">@ViewBag.Place.Name adlı mekana @Model.NumberOfPerson kişilik randevunuz var.</h3>
+        </div>
+       <div class="card-body">
+            <h5 class="card-title">Randevu Tarihi : @Model.DateAndTime</h5>
+            Randevunuzun durumu :@Model.Status
+            <hr />
+
+            <p class="mb-3">Notlarınız : @Model.Notes</p>
+
+            <p class="mb-3">İletişim numaranız : @Model.PhoneNumber</p>
+
+            <small>Bu randevuyu @Model.CreatedAt tarihinde oluşturdunuz.</small>
+            @if(Model.UpdatedAt != null)
+            {
+                <small>Bu randevuyu @Model.UpdatedAt tarihinde güncellediniz.</small>
+            })
+        </div>
+        <a class="btn btn-warning mb-3" asp-action="UpdateReservation" asp-route-id="@Model.Id">Randevuyu güncelleyin.</a>
+        <a class="btn btn-danger" asp-controller="Reservation" asp-action="Passive" asp-route-id="@Model.Id">Randevuyu iptal edin.</a>
+              
+    </div>
+    <a class="btn btn-primary" asp-action="Index"> Go Back</a>
+</div>
+    

@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Reservation List";
+}
+@model List<ReservationViewModel>
+
+<div class="container-fluid">
+    <div class="row">
+        <h3>All Reservations here</h3>
+        <div class="d-block my-2">
+            <a class="btn btn-primary float-end" asp-action="CreateReservation">Create New Reservation</a>
+
+        </div>
+       
+        @if (Model.Any())
+        {
+           
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Rezervasyon numarası</th>
+                        <th>DateTime</th>
+                        <th>Number Of Peoples</th>
+                        <th>Note</th>
+                        <th>Phone number</th>
+                        <th>PlaceId</th>
+                        <th>Statu</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reservation in Model)
+                    {
+                        <tr>
+                            <td>@reservation.Id</td>
+                                <td>@reservation.DateAndTime</td>
+                                <td>@reservation.NumberOfPerson</td>
+                                <td>@reservation.Notes</td>
+                                <td>@reservation.PhoneNumber</td>
+                                <td>@reservation.PlaceId</td>
+                                <td>@reservation.Status</td>
+                            <td><a asp-action="ReservationDetails" asp-route-id="@reservation.Id" class="btn btn-outline-dark btn-sm text-black">İncele</a></td>
+                            </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="d-block">
+                <p class="float-end d-flex">Total @Model.Count reservations found.</p>
+            </div>
+        }
+        else
+        {
+            <p class="bg-danger">No reservations found</p>
+        }
+    </div>
+</div>

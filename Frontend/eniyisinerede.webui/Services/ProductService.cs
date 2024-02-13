@@ -1,5 +1,4 @@
 using eniyisinerede.webui.Services.Interfaces;
-using eniyisinerede.webui.ViewModels;
 using eniyisinerede.webui.ViewModels.Products;
 using SharedLibrary.Dtos;
 
@@ -17,14 +16,14 @@ public class ProductService : IProductService
     public async Task<bool> CreateAsync(CreateProductViewModel createProductViewModel)
     {
         var clientResult=await _httpClient.PostAsJsonAsync("product", createProductViewModel);
-        if(!clientResult.IsSuccessStatusCode)
+        if (!clientResult.IsSuccessStatusCode)
             return false;
 
         var productViewModel = await clientResult.Content.ReadFromJsonAsync<ApiResponse<CreateProductViewModel>>();
-        
-        if(productViewModel.StatusCode!= StatusCodes.Status201Created)
+
+        if (productViewModel.StatusCode != StatusCodes.Status201Created)
             return false;
-        
+
         return true;
     }
 
@@ -33,11 +32,11 @@ public class ProductService : IProductService
         var clientResult =await _httpClient.DeleteAsync($"product/{productId}");
         if (!clientResult.IsSuccessStatusCode)
             return false;
-        
+
         var clientContent = await clientResult.Content.ReadFromJsonAsync<ApiResponse<NoContent>>();
-        if(clientContent.StatusCode!= StatusCodes.Status204NoContent)
+        if (clientContent.StatusCode != StatusCodes.Status204NoContent)
             return false;
-        
+
         return true;
 
     }
@@ -63,15 +62,15 @@ public class ProductService : IProductService
     public async Task<bool> UpdateAsync(UpdateProductViewModel updateProductViewModel)
     {
         var clientResult =await _httpClient.PutAsJsonAsync($"product/{updateProductViewModel.Id}", updateProductViewModel);
-        
+
         if (!clientResult.IsSuccessStatusCode)
             return false;
 
         var productViewModel = await clientResult.Content.ReadFromJsonAsync<ApiResponse<UpdateProductViewModel>>();
-        
-        if(productViewModel.StatusCode!= StatusCodes.Status200OK)
+
+        if (productViewModel.StatusCode != StatusCodes.Status200OK)
             return false;
-        
+
         return true;
     }
 }

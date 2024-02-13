@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+}
+@model CreateCountryViewModel
+
+
+<div class="container">
+
+    <h2 class="text-center">Create Country</h2>
+    <form method="post" asp-action="CreateCountry">
+        <div asp-validation-summary="ModelOnly" class="alert alert-warning"></div>
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="Name">
+            <span asp-validation-for="Name" class="danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Code" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="Code">
+            <span asp-validation-for="Code" class="danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+    <a class="text-primary" asp-action="Index">İptal et ve ülke listesine dön</a>
+</div>

@@ -2,7 +2,12 @@
 @{
     ViewData["Title"] = "Products";
 }
+<div class="container">
     <h3>Products here</h3>
+    <div class="d-block my-2">
+        <a class="btn btn-primary float-end" asp-action="CreateProduct">Create New Product</a>
+
+    </div>
     @if (Model.Any())
     {
         <div class="row">
@@ -22,7 +27,7 @@
                         </div>
                         <h6 class="text-primary">@product.Price</h6>
                         <div class="col">
-                            <a asp-controller="Home" asp-action="Detail" asp-route-id="@product.Id">
+                            <a asp-action="ProductDetails" asp-route-id="@product.Id">
                                 <button class="btn btn-primary d-block btn-sm">Ayrıntılı bilgi</button>
                             </a>
                         </div>
@@ -35,3 +40,4 @@
     {
         <p>No products found</p>
     }
+</div>
