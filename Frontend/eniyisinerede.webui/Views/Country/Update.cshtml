@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Update";
+}
+@model UpdateCountryViewModel
+
+
+
+<div class="container">
+
+    <h2 class="text-center">Update Country</h2>
+    <form method="post" asp-action="UpdateCountry">
+        <div asp-validation-summary="ModelOnly" class="alert alert-warning"></div>
+        <input type="hidden" asp-for="Id">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="Name">
+            <span asp-validation-for="Name" class="danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Code" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="Code">
+            <span asp-validation-for="Code" class="danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a class="text-primary" asp-action="CountryDetails" asp-route-id="@Model.Id">Güncellemeyi İptal et ve ülke bilgilerine dön.</a>
+
+    </form>
+
+</div>

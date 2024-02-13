@@ -3,7 +3,7 @@
 }
 @model List<ProductViewModel>
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <h3>Products here</h3>
 
@@ -30,8 +30,8 @@
                             <td>@product.Name</td>
                             <td>@product.Description</td>
                             <td>@product.Price</td>
-                            <td><a class="btn btn-outline-warning text-warning" asp-controller="Product" asp-action="Update" asp-route-id="@product.Id">Update</a></td>
-                            <td><a class="btn btn-outline-danger text-danger" asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id">Delete</a></td>
+                            <td><a class="btn btn-outline-warning text-warning" asp-action="UpdateProduct" asp-route-id="@product.Id">Update</a></td>
+                            <td><a class="btn btn-outline-danger text-danger" asp-action="DeleteProduct" asp-route-id="@product.Id">Delete</a></td>
                         </tr>
                     }
                 </tbody>

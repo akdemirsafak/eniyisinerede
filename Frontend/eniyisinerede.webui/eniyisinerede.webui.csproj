@@ -16,10 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mappers\Locations\" />
     <Folder Include="Mappers\Places\" />
     <Folder Include="Mappers\Products\" />
-    <Folder Include="TagHelpers\" />
+    <Folder Include="ViewModels\Cities\" />
+    <Folder Include="ViewModels\Districts\" />
   </ItemGroup>
 
 </Project>

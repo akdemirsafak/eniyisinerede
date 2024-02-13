@@ -18,7 +18,7 @@ public class PlaceService : IPlaceService
         var httpResponse = await _httpClient.GetAsync("place");
         if (!httpResponse.IsSuccessStatusCode)
             return null;
-     
+
         var placeViewModel = await httpResponse.Content.ReadFromJsonAsync<ApiResponse<List<PlaceViewModel>>>();
         return placeViewModel.Data;
     }

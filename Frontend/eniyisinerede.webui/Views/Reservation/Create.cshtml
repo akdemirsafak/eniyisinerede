@@ -3,8 +3,8 @@
 }
 @model CreateReservationViewModel
 
-<h2 class="text-center">Create Product</h2>
-<form method="post" asp-controller="Reservation" asp-action="Create">
+<h2 class="text-center">Create Reservation</h2>
+<form method="post" asp-action="CreateReservation">
     
     <div class="mb-3">
         <select asp-for="PlaceId" asp-items="ViewBag.Places" class="form-control">

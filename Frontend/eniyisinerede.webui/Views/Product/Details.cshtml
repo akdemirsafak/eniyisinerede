@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Product Details";
 }
-
+<div class="container">
 <div class="card">
     <div class="card">
         <div class="card-header">
@@ -14,4 +14,9 @@
             <h6 class="text-primary">@Model.Price</h6>
         </div>
     </div>
+    <a class="btn btn-warning mb-3" asp-action="UpdateProduct" asp-route-id="@Model.Id">Ürünü güncelleyin.</a>
+</div>
+
+<a class="text-primary" asp-action="Index"> Ürün listesine dön</a>
+
 </div>
