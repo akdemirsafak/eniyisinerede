@@ -1,4 +1,5 @@
 ﻿using eniyisinerede.webui.Services.Interfaces;
+using eniyisinerede.webui.ViewModels.Cities;
 using eniyisinerede.webui.ViewModels.Countries;
 using SharedLibrary.Dtos;
 using System.Text;
@@ -57,15 +58,16 @@ public class CountryService : ICountryService
         return countryViewModel.Data;
     }
 
-    public async Task<CountryViewModel> GetByIdAsync(int countryId)
+
+    public async Task<CountryViewModel> GetByIdAsync(int id)
     {
-        var requestResponse= await _httpClient.GetAsync($"country/{countryId}");
+        var requestResponse=await _httpClient.GetAsync($"country/{id}");
         if (!requestResponse.IsSuccessStatusCode)
             return null;
-        var country = await requestResponse.Content.ReadFromJsonAsync<ApiResponse<CountryViewModel>>();
-        return country.Data;
-    }
 
+        var responseContent = await requestResponse.Content.ReadFromJsonAsync<ApiResponse<CountryViewModel>>();
+        return responseContent.Data;
+    }
 
     public async Task<CountryViewModel> UpdateAsync(UpdateCountryViewModel updateCountryViewModel)
     {

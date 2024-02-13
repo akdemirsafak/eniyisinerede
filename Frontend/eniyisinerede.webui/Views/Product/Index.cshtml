@@ -5,7 +5,7 @@
 <div class="container">
     <h3>Products here</h3>
     <div class="d-block my-2">
-        <a class="btn btn-primary float-end" asp-action="CreateProduct">Create New Product</a>
+        <a class="btn btn-primary float-end" asp-controller="Product" asp-action="Create">Create New Product</a>
 
     </div>
     @if (Model.Any())
@@ -27,7 +27,7 @@
                         </div>
                         <h6 class="text-primary">@product.Price</h6>
                         <div class="col">
-                            <a asp-action="ProductDetails" asp-route-id="@product.Id">
+                            <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">
                                 <button class="btn btn-primary d-block btn-sm">Ayrıntılı bilgi</button>
                             </a>
                         </div>

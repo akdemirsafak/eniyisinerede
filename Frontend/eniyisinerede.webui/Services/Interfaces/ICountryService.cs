@@ -4,7 +4,7 @@ namespace eniyisinerede.webui.Services.Interfaces;
 
 public interface ICountryService
 {
-    Task<CountryViewModel> GetByIdAsync(int countryId);
+    Task<CountryViewModel> GetByIdAsync(int id);
     Task<List<CountryViewModel>> GetAllAsync();
     Task<CountryViewModel> CreateAsync(CreateCountryViewModel createCountryViewModel);
     Task<CountryViewModel> UpdateAsync(UpdateCountryViewModel updateCountryViewModel);

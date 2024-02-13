@@ -8,7 +8,7 @@
     <div class="row col-md-8 offset-2">
         <div class="col">
             <h2 class="text-center">Update Reservation</h2>
-            <form method="post" asp-action="UpdateReservation">
+            <form method="post" asp-controller="Reservation" asp-action="Update">
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <div class="mb-3">
@@ -35,6 +35,6 @@
         
         </div>
     </div>
-    <a class="text-primary" asp-action="ReservationDetails" asp-route-id="@Model.Id">Güncellemeyi iptal et ve rezervasyon detaylarına dön</a>
+    <a class="text-primary" asp-controller="Reservation" asp-action="Details" asp-route-id="@Model.Id">Güncellemeyi iptal et ve rezervasyon detaylarına dön</a>
 </div>
 

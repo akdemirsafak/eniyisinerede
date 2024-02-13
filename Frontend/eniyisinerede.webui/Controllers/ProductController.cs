@@ -17,14 +17,12 @@ public class ProductController : Controller
         var datas =await _productService.GetAllAsync();
         return View(datas);
     }
-    [HttpGet("List")]
     public async Task<IActionResult> List()
     {
         var datas =await _productService.GetAllAsync();
         return View(datas);
     }
 
-    [HttpGet("ProductDetails/{id}")]
     public async Task<IActionResult> Details(Guid id)
     {
         var data = await _productService.GetAsync(id);
@@ -35,12 +33,11 @@ public class ProductController : Controller
 
     //Create
 
-    [HttpGet("CreateProduct")]
     public IActionResult Create()
     {
         return View();
     }
-    [HttpPost("CreateProduct")]
+    [HttpPost]
     public async Task<IActionResult> Create(CreateProductViewModel createProductViewModel)
     {
         var result = await _productService.CreateAsync(createProductViewModel);
@@ -49,7 +46,6 @@ public class ProductController : Controller
 
     //Update
 
-    [HttpGet("UpdateProduct/{id}")]
     public async Task<IActionResult> Update(Guid id)
     {
         var data = await _productService.GetAsync(id);
@@ -64,8 +60,7 @@ public class ProductController : Controller
         return View(updateProductViewModel);
     }
 
-    [HttpPut("UpdateProduct")]
-
+    [HttpPut]
     public async Task<IActionResult> Update(UpdateProductViewModel updateProductViewModel)
     {
         var result = await _productService.UpdateAsync(updateProductViewModel);

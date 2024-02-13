@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eniyisinerede.webui.Controllers;
 
-[Route("[controller]")]
 public class CountryController : Controller
 {
     private readonly ICountryService _countryService;
@@ -13,17 +12,15 @@ public class CountryController : Controller
     {
         _countryService = countryService;
     }
-    [HttpGet]
     public async Task<IActionResult> Index()
     {
         var countries = await _countryService.GetAllAsync();
         return View(countries);
     }
-
-    [HttpGet("CountryDetails/{countryId}")]
-    public async Task<IActionResult> Details(int countryId)
+    
+    public async Task<IActionResult> Details(int id)
     {
-        var country = await _countryService.GetByIdAsync(countryId);
+        var country = await _countryService.GetByIdAsync(id);
         return View(country);
     }
 
@@ -41,10 +38,9 @@ public class CountryController : Controller
         return View(createCountryViewModel);
     }
 
-    [HttpGet("UpdateCountry/{countryId}")]
-    public async Task<IActionResult> Update(int countryId)
+    public async Task<IActionResult> Update(int id)
     {
-        var country = await _countryService.GetByIdAsync(countryId);
+        var country = await _countryService.GetByIdAsync(id);
         return View();
     }
     [HttpPut]

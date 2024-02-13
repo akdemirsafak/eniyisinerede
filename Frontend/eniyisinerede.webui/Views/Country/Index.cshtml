@@ -9,7 +9,7 @@
         <h3>Countries here</h3>
 
         <div class="d-block my-2">
-            <a class="btn btn-primary float-end" asp-action="CreateCountry">Create Country</a>
+            <a class="btn btn-primary float-end" asp-controller="Country" asp-action="Create">Create Country</a>
         </div>
 
         @if (Model.Any())
@@ -30,7 +30,7 @@
                             <td>@country.Id</td>
                             <td>@country.Name</td>
                             <td>@country.Code</td>
-                            <td><a class="btn btn-primary" asp-action="CountryDetails" asp-route-id="@country.Id">İncele</a></td>
+                            <td><a class="btn btn-primary" asp-controller="Country" asp-action="Details" asp-route-id="@country.Id">İncele</a></td>
                         </tr>
                     }
                 </tbody>

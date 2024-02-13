@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Cities";
+}
+@model List<CityViewModel>
+
+
+<div class="container">
+    <div class="row">
+        <h3>Cities here</h3>
+        <div class="d-block my-2">
+            <a class="btn btn-primary float-end" asp-controller="City" asp-action="Create">Create City</a>
+        </div>
+
+        @if (Model.Any())
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>CountryId</th>
+                        <th>Operation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var city in Model)
+                    {
+                        <tr>
+                            <td>@city.Id</td>
+                            <td>@city.Name</td>
+                            <td>@city.CountryId</td>
+                            <td><a class="btn btn-outline-warning text-warning" asp-controller="City" asp-action="Update" asp-route-id="@city.Id">Update</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="bg-danger">No city found</p>
+        }
+    </div>
+</div>
