@@ -5,15 +5,15 @@
 
 <div class="container-fluid">
     <div class="row">
+        
         <h3>All Reservations here</h3>
-        <div class="d-block my-2">
-            <a class="btn btn-primary float-end" asp-action="CreateReservation">Create New Reservation</a>
 
+        <div class="d-block my-2">
+            <a class="btn btn-primary float-end" asp-controller="Reservation"  asp-action="Create">Create New Reservation</a>
         </div>
        
         @if (Model.Any())
         {
-           
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -38,7 +38,7 @@
                                 <td>@reservation.PhoneNumber</td>
                                 <td>@reservation.PlaceId</td>
                                 <td>@reservation.Status</td>
-                            <td><a asp-action="ReservationDetails" asp-route-id="@reservation.Id" class="btn btn-outline-dark btn-sm text-black">İncele</a></td>
+                            <td><a asp-controller="Reservation" asp-action="Details" asp-route-id="@reservation.Id" class="btn btn-outline-dark btn-sm text-black">İncele</a></td>
                             </tr>
                     }
                 </tbody>

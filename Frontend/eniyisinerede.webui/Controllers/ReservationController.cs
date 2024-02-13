@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace eniyisinerede.webui.Controllers;
 
-[Route("[controller]")]
 public class ReservationController : Controller
 {
     private readonly IReservationService _reservationService;
@@ -26,14 +25,13 @@ public class ReservationController : Controller
         return View(datas);
     }
     //Create
-    [HttpGet("CreateReservation")]
     public async Task<IActionResult> Create()
     {
         //ViewBag.Places = await _placeService.GetAllAsync();
         ViewBag.Places = new SelectList(await _placeService.GetAllAsync(), "Id", "Name");
         return View();
     }
-    [HttpPost("CreateReservation")]
+    [HttpPost]
     public async Task<IActionResult> Create(CreateReservationViewModel createReservationViewModel)
     {
         var result = await _reservationService.CreateAsync(createReservationViewModel);
@@ -44,7 +42,6 @@ public class ReservationController : Controller
         return View();//createReservationViewModel
     }
     //Update
-    [HttpGet("UpdateReservation/{id}")]
     public async Task<IActionResult> Update(string id)
     {
         var reservation = await _reservationService.GetByIdAsync(id);
@@ -75,7 +72,6 @@ public class ReservationController : Controller
 
         return View();
     }
-    [HttpGet("ReservationDetails/{id}")]
     public async Task<IActionResult> Details(string id)
     {
         var reservation = await _reservationService.GetByIdAsync(id);

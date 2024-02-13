@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Update City";
+}
+@model UpdateCityViewModel
+<div class="container">
+    <h2 class="text-center">Update City</h2>
+    <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+    <form method="post" asp-action="Update" asp-controller="City">
+        <input type="hidden" asp-for="Id">
+        <div class="mb-3">
+            <select asp-for="CountryId" asp-items="ViewBag.Countries" class="form-control">
+                <option value="">Select an option</option>
+            </select>
+            <span asp-validation-for="Name" class="danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="Name">
+            <span asp-validation-for="Name" class="danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+
+    <a asp-controller="City" asp-action="Index" class="text-primary">Back to List</a>
+</div>

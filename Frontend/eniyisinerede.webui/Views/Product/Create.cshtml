@@ -8,7 +8,7 @@
         <a class="btn btn-primary float-end" asp-action="CreateReservation">Create New Reservation</a>
 
     </div>
-<form method="post" asp-action="CreateProduct">
+<form method="post" asp-controller="Product" asp-action="Create">
     <div class="mb-3">
         <label asp-for="Name" class="form-label"></label>
         <input type="text" class="form-control" asp-for="Name">
@@ -32,6 +32,6 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-<a class="text-primary" asp-action="Index">Cancel and return to the product list</a>
+<a class="text-primary" asp-controller="Product" asp-action="Index">Cancel and return to the product list</a>
 
 </div>

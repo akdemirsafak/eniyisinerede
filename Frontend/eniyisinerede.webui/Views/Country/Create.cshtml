@@ -8,7 +8,7 @@
 <div class="container">
 
     <h2 class="text-center">Create Country</h2>
-    <form method="post" asp-action="CreateCountry">
+    <form method="post" asp-controller="Country" asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="alert alert-warning"></div>
         <div class="mb-3">
             <label asp-for="Name" class="form-label"></label>
@@ -22,5 +22,5 @@
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
-    <a class="text-primary" asp-action="Index">İptal et ve ülke listesine dön</a>
+    <a class="text-primary" asp-controller="Country" asp-action="Index">İptal et ve ülke listesine dön</a>
 </div>

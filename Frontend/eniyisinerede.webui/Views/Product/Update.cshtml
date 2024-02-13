@@ -7,7 +7,7 @@
 
 <h2 class="text-center">Update Product</h2>
 
-<form method="post" asp-action="UpdateProduct">
+    <form method="post" asp-controller="Product" asp-action="Update">
     <div class="mb-3">
         <label asp-for="Name" class="form-label"></label>
         <input type="text" class="form-control" asp-for="Name">
@@ -31,5 +31,5 @@
     <button type="submit" class="btn btn-primary">güncelle</button>
 </form>
 
-<a class="text-primary" asp-action="ProductDetails" asp-route-id="@Model.Id"> Güncellemeyi iptal et ve ürün bilgilerine geri dön.</a>
+    <a class="text-primary" asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id"> Güncellemeyi iptal et ve ürün bilgilerine geri dön.</a>
 </div>
