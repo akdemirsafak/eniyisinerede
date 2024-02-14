@@ -1,0 +1,43 @@
+﻿@model UpdatePlaceViewModel
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="container">
+    <h2 class="text-center">Create Place</h2>
+    <form method="post" asp-controller="Place" asp-action="Update">
+        <div asp-validation-summary="ModelOnly" class="alert alert-warning"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="Name">
+            <span asp-validation-for="Name" class="danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="Description">
+            <span asp-validation-for="Description" class="danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="Address">
+            <span asp-validation-for="Address" class="danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PhotoUrl" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="PhotoUrl">
+            <span asp-validation-for="PhotoUrl" class="danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Güncelle</button>
+    </form>
+    <a class="text-primary" asp-controller="Place" asp-action="Index">İptal et ve mekanlar listesine dön</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

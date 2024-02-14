@@ -6,4 +6,7 @@ public interface IPlaceService
 {
     Task<List<PlaceViewModel>> GetAllAsync();
     Task<PlaceViewModel> GetByIdAsync(string id);
+    Task<PlaceViewModel> CreateAsync(CreatePlaceViewModel createPlaceViewModel);
+    Task<PlaceViewModel> UpdateAsync(UpdatePlaceViewModel updatePlaceViewModel);
+
 }
