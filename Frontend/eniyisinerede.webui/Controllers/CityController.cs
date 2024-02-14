@@ -1,4 +1,5 @@
-﻿using eniyisinerede.webui.Services.Interfaces;
+﻿using AutoMapper;
+using eniyisinerede.webui.Services.Interfaces;
 using eniyisinerede.webui.ViewModels.Cities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,11 +10,12 @@ public class CityController : Controller
 {
     private readonly ICityService _cityService;
     private readonly ICountryService _countryService;
-
-    public CityController(ICityService cityService, ICountryService countryService)
+    private readonly IMapper _mapper;
+    public CityController(ICityService cityService, ICountryService countryService, IMapper mapper)
     {
         _cityService = cityService;
         _countryService = countryService;
+        _mapper = mapper;
     }
 
     public async Task<IActionResult> Index()
@@ -25,20 +27,27 @@ public class CityController : Controller
     public async Task<IActionResult> Details(int id)
     {
         var city= await _cityService.GetByIdAsync(id);
-        return View();
+        if (city is null)
+            return RedirectToAction(nameof(Index));
+
+        ViewBag.Country = await _countryService.GetByIdAsync(city.CountryId);
+        return View(city);
     }
     //CREATE
     [HttpGet]
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
+        ViewBag.Countries = new SelectList(await _countryService.GetAllAsync(), "Id", "Name");
         return View();
     }
     [HttpPost]
     public async Task<IActionResult> Create(CreateCityViewModel createCityViewModel)
     {
-        ViewBag.Countries = new SelectList(await _countryService.GetAllAsync(), "Id", "Name");
-
         var city = await _cityService.CreateAsync(createCityViewModel);
+        if (city is not null)
+            return RedirectToAction(nameof(Details), new { id = city.Id });
+
+        ViewBag.Countries = new SelectList(await _countryService.GetAllAsync(), "Id", "Name");
 
         return View();
     }
@@ -46,21 +55,17 @@ public class CityController : Controller
     public async Task<IActionResult> Update(int id)
     {
         var city= await _cityService.GetByIdAsync(id);
-        var updateCityViewModel = new UpdateCityViewModel
-        {
-            Id = city.Id,
-            Name = city.Name,
-            CountryId = city.CountryId
-        };
+
+        var updateCityViewModel = _mapper.Map<UpdateCityViewModel>(city);
         ViewBag.Countries = new SelectList(await _countryService.GetAllAsync(), "Id", "Name", city.CountryId);
         return View(updateCityViewModel);
     }
-    [HttpPut]
+    [HttpPost]
     public async Task<IActionResult> Update(UpdateCityViewModel updateCityViewModel)
     {
         var city = await _cityService.UpdateAsync(updateCityViewModel);
-        if (city != null)
-            return RedirectToAction(nameof(Details), city.Id);
+        if (city is not null)
+            return RedirectToAction(nameof(Details), new { id = city.Id });
 
         ViewBag.Countries = new SelectList(await _countryService.GetAllAsync(), "Id", "Name", updateCityViewModel.CountryId);
         return View();

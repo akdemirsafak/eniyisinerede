@@ -16,10 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mappers\Places\" />
-    <Folder Include="Mappers\Products\" />
     <Folder Include="ViewModels\Cities\" />
-    <Folder Include="ViewModels\Districts\" />
   </ItemGroup>
 
 </Project>

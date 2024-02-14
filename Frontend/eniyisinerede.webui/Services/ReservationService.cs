@@ -1,8 +1,6 @@
 ﻿using eniyisinerede.webui.Services.Interfaces;
 using eniyisinerede.webui.ViewModels.Reservations;
 using SharedLibrary.Dtos;
-using System.Text;
-using System.Text.Json;
 
 namespace eniyisinerede.webui.Services;
 
@@ -17,33 +15,29 @@ public class ReservationService : IReservationService
 
     public async Task<bool> CancellReservationAsync(string id)
     {
-        var request = new HttpRequestMessage(HttpMethod.Put, $"reservation/CancellReservation/{id}");
-        var response = await _httpClient.SendAsync(request);
-        //var response= await _httpClient.PutAsJsonAsync<ApiResponse<ReservationViewModel>>($"reservation/CancellReservation/{id}");
-        if (!response.IsSuccessStatusCode)
-            return false;
 
-        var result = await response.Content.ReadFromJsonAsync<ApiResponse<ReservationViewModel>>();
+        var requestResponse = await _httpClient.PutAsync($"reservation/CancellReservation/{id}",null);
+
+        if (!requestResponse.IsSuccessStatusCode)
+            return false;
+        var responseContent= await requestResponse.Content.ReadFromJsonAsync<ApiResponse<ReservationViewModel>>();
+        if (responseContent.Errors is not null)
+            return false;
         return true;
+
     }
 
-    public async Task<bool> CreateAsync(CreateReservationViewModel createReservationViewModel)
+    public async Task<ReservationViewModel> CreateAsync(CreateReservationViewModel createReservationViewModel)
     {
 
-        var request= new HttpRequestMessage(HttpMethod.Post, "reservation");
-        request.Content = new StringContent(JsonSerializer.Serialize(createReservationViewModel), Encoding.UTF8, "application/json");
+        var clientResult=await _httpClient.PostAsJsonAsync("reservation", createReservationViewModel);
+        if (!clientResult.IsSuccessStatusCode)
+            return null;
 
-        var response = await _httpClient.SendAsync(request);
+        var responseContent = await clientResult.Content.ReadFromJsonAsync<ApiResponse<ReservationViewModel>>();
 
-        //var response = await _httpClient.PostAsAsync("reservation", createReservationViewModel);
-        if (!response.IsSuccessStatusCode)
-            return false;
+        return responseContent.Data;
 
-        var result = await response.Content.ReadFromJsonAsync<ApiResponse<ReservationViewModel>>();
-
-        if (result.StatusCode != StatusCodes.Status201Created)
-            return true;
-        return false;
     }
 
     public async Task<List<ReservationViewModel>> GetAllAsync()
@@ -66,22 +60,18 @@ public class ReservationService : IReservationService
         return result.Data;
     }
 
-    public async Task<bool> UpdateAsync(UpdateReservationViewModel updateReservationViewModel)
+    public async Task<ReservationViewModel> UpdateAsync(UpdateReservationViewModel updateReservationViewModel)
     {
-        var request = new HttpRequestMessage(HttpMethod.Put, $"reservation/{updateReservationViewModel.Id}");
-        request.Content = new StringContent(JsonSerializer.Serialize(updateReservationViewModel), Encoding.UTF8, "application/json");
+        var requestResponse= await _httpClient.PutAsJsonAsync($"reservation/{updateReservationViewModel.Id}", updateReservationViewModel);
 
-        var response = await _httpClient.SendAsync(request);
+        if (!requestResponse.IsSuccessStatusCode)
+            return null;
 
-        //var requestResponse = await _httpClient.PutAsJsonAsync<ApiResponse<ReservationViewModel>>($"reservation/{id}", updateReservationViewModel);
-        if (!response.IsSuccessStatusCode)
-            return false;
+        var responseContent = await requestResponse.Content.ReadFromJsonAsync<ApiResponse<ReservationViewModel>>();
 
-        var content= await response.Content.ReadFromJsonAsync<ApiResponse<UpdateReservationViewModel>>();
-        if (content.StatusCode != StatusCodes.Status200OK)
-            return false;
+        if (responseContent.Errors is not null)
+            return null;
 
-        return true;
-
+        return responseContent.Data;
     }
 }

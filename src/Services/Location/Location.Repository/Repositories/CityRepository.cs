@@ -48,7 +48,7 @@ public class CityRepository : BaseRepository, ICityRepository
 
     public async Task<City> UpdateAsync(City city)
     {
-        var checkCountry = await _dbConnection.ExecuteScalarAsync<int>("SELECT Count(*) FROM country WHERE id=@id", new { id=city.CountryId });
+        var checkCountry = await _dbConnection.ExecuteScalarAsync<int>("SELECT Count(*) FROM countries WHERE id=@id", new { id=city.CountryId });
         if (checkCountry == 0)
             throw new Exception("Country not found");
 

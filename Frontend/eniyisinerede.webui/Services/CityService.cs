@@ -20,8 +20,6 @@ public class CityService : ICityService
             return null;
 
         var responseContent = await requestResponse.Content.ReadFromJsonAsync<ApiResponse<CityViewModel>>();
-        if (responseContent.StatusCode != StatusCodes.Status201Created)
-            return null;
 
         return responseContent.Data;
     }
@@ -45,6 +43,7 @@ public class CityService : ICityService
 
         var responseContent = await requestResponse.Content.ReadFromJsonAsync<ApiResponse<CityViewModel>>();
         return responseContent.Data;
+
     }
 
     public async Task<CityViewModel> UpdateAsync(UpdateCityViewModel updateCityViewModel)

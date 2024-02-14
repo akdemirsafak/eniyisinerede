@@ -4,10 +4,7 @@
 @model CreateProductViewModel
 <div class="container">
 <h2 class="text-center">Create Product</h2>
-    <div class="d-block my-2">
-        <a class="btn btn-primary float-end" asp-action="CreateReservation">Create New Reservation</a>
 
-    </div>
 <form method="post" asp-controller="Product" asp-action="Create">
     <div class="mb-3">
         <label asp-for="Name" class="form-label"></label>
