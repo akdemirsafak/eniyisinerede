@@ -1,0 +1,22 @@
+﻿@model PlaceViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container">
+    <div class="card">
+
+        <div class="card-body">
+            <h5 class="card-title">Mekan Adı : @Model.Name</h5>
+            Adresi :@Model.Address
+            <hr />
+            <p class="mb-3">Notlarınız : @Model.Description</p>
+            <p class="mb-3">Bu da fotoğrafın adresi : @Model.PhotoUrl</p>
+        </div>
+        <a class="btn btn-warning mb-3" asp-controller="Place" asp-action="Update" asp-route-id="@Model.Id">Mekanı güncelleyin.</a>
+
+    </div>
+    <a class="text-primary" asp-controller="Place" asp-action="Index"> Go Back</a>
+</div>
+

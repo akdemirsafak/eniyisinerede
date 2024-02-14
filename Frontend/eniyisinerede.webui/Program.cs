@@ -23,9 +23,7 @@ builder.Services.Scan(scan => scan.FromAssemblies(assemblies)
                           .AsMatchingInterface()
                           .WithScopedLifetime());
 
-
 builder.Services.AddAutoMapper(typeof(Program));
-
 
 
 builder.Services.AddHttpClient<IPlaceService, PlaceService>(options =>

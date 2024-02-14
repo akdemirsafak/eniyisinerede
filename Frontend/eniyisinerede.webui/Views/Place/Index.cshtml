@@ -1,0 +1,54 @@
+﻿@model List<PlaceViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <h3>All Places here</h3>
+
+        <div class="d-block my-2">
+            <a class="btn btn-primary float-end" asp-controller="Place" asp-action="Create">Create New Reservation</a>
+        </div>
+
+        @if (Model.Any())
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Address</th>
+                        <th>Photo</th>
+                      
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var place in Model)
+                    {
+                        <tr>
+                            <td>@place.Id</td>
+                            <td>@place.Name</td>
+                            <td>@place.Description</td>
+                            <td>@place.Address</td>
+                            <td><img src="@place.PhotoUrl" alt="" class="img img-fluid" style="width:64;height:64px;" /></td>
+      
+                            <td><a asp-controller="Place" asp-action="Details" asp-route-id="@place.Id" class="btn btn-outline-dark btn-sm text-black">İncele</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="d-block">
+                <p class="float-end d-flex">Total @Model.Count places found.</p>
+            </div>
+        }
+        else
+        {
+            <p class="bg-danger">No place found</p>
+        }
+    </div>
+</div>

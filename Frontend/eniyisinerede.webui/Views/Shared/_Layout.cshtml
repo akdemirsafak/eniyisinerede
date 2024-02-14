@@ -26,6 +26,22 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
+                    
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menü
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" asp-controller="Product" asp-action="Index">Products</a></li>
+                            <li><a class="dropdown-item" asp-controller="Country" asp-action="Index">Countries</a></li>
+                            <li><a class="dropdown-item" asp-controller="City" asp-action="Index">Cities</a></li>
+                            <li><a class="dropdown-item" asp-controller="District" asp-action="Index">Districts</a></li>
+                            <li><a class="dropdown-item" asp-controller="Place" asp-action="Index">Places</a></li>
+                            <li><a class="dropdown-item" asp-controller="Reservation" asp-action="Index">Reservations</a></li>
+                        </ul>
+                    </div>
+
+
                 </div>
             </div>
         </nav>
