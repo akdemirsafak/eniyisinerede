@@ -13,18 +13,15 @@ public class ProductService : IProductService
         _httpClient = httpClient;
     }
 
-    public async Task<bool> CreateAsync(CreateProductViewModel createProductViewModel)
+    public async Task<ProductViewModel> CreateAsync(CreateProductViewModel createProductViewModel)
     {
         var clientResult=await _httpClient.PostAsJsonAsync("product", createProductViewModel);
         if (!clientResult.IsSuccessStatusCode)
-            return false;
+            return null;
 
-        var productViewModel = await clientResult.Content.ReadFromJsonAsync<ApiResponse<CreateProductViewModel>>();
+        var productViewModel = await clientResult.Content.ReadFromJsonAsync<ApiResponse<ProductViewModel>>();
 
-        if (productViewModel.StatusCode != StatusCodes.Status201Created)
-            return false;
-
-        return true;
+        return productViewModel.Data;
     }
 
     public async Task<bool> DeleteAsync(Guid productId)
@@ -59,18 +56,15 @@ public class ProductService : IProductService
         return productViewModel.Data;
     }
 
-    public async Task<bool> UpdateAsync(UpdateProductViewModel updateProductViewModel)
+    public async Task<ProductViewModel> UpdateAsync(UpdateProductViewModel updateProductViewModel)
     {
         var clientResult =await _httpClient.PutAsJsonAsync($"product/{updateProductViewModel.Id}", updateProductViewModel);
 
         if (!clientResult.IsSuccessStatusCode)
-            return false;
+            return null;
 
-        var productViewModel = await clientResult.Content.ReadFromJsonAsync<ApiResponse<UpdateProductViewModel>>();
+        var productViewModel = await clientResult.Content.ReadFromJsonAsync<ApiResponse<ProductViewModel>>();
 
-        if (productViewModel.StatusCode != StatusCodes.Status200OK)
-            return false;
-
-        return true;
+        return productViewModel.Data;
     }
 }

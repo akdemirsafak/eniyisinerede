@@ -27,19 +27,18 @@ public class ReservationController : Controller
     //Create
     public async Task<IActionResult> Create()
     {
-        //ViewBag.Places = await _placeService.GetAllAsync();
         ViewBag.Places = new SelectList(await _placeService.GetAllAsync(), "Id", "Name");
         return View();
     }
     [HttpPost]
     public async Task<IActionResult> Create(CreateReservationViewModel createReservationViewModel)
     {
-        var result = await _reservationService.CreateAsync(createReservationViewModel);
-        if (result != null)
-            return RedirectToAction(nameof(Index));
+        var reservation = await _reservationService.CreateAsync(createReservationViewModel);
+        if (reservation is not null)
+            return RedirectToAction(nameof(Details), new { id = reservation.Id });
 
         ViewBag.Places = await _placeService.GetAllAsync();
-        return View();//createReservationViewModel
+        return View(createReservationViewModel);
     }
     //Update
     public async Task<IActionResult> Update(string id)
@@ -49,17 +48,16 @@ public class ReservationController : Controller
         if (reservation is null)
             return RedirectToAction(nameof(Index));
 
-
         var model=_mapper.Map<UpdateReservationViewModel>(reservation);
         return View(model);
 
     }
-    [HttpPut]
+    [HttpPost]
     public async Task<IActionResult> Update(UpdateReservationViewModel updateReservationViewModel)
     {
-        var result =await _reservationService.UpdateAsync(updateReservationViewModel);
-        if (result)
-            return RedirectToAction(nameof(Index));
+        var reservation =await _reservationService.UpdateAsync(updateReservationViewModel);
+        if (reservation is not null)
+            return RedirectToAction(nameof(Details), new { id = reservation.Id });
 
         ViewBag.Places = new SelectList(await _placeService.GetAllAsync(), "Id", "Name", updateReservationViewModel.PlaceId);
         return View();
@@ -75,9 +73,11 @@ public class ReservationController : Controller
     public async Task<IActionResult> Details(string id)
     {
         var reservation = await _reservationService.GetByIdAsync(id);
+        if (reservation is null)
+            return RedirectToAction(nameof(Index));
+
         var place=await _placeService.GetByIdAsync(reservation.PlaceId);
         ViewBag.Place = place;
-
         return View(reservation);
     }
 }

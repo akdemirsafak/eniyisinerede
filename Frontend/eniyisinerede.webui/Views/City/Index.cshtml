@@ -20,6 +20,7 @@
                         <th>Name</th>
                         <th>CountryId</th>
                         <th>Operation</th>
+                        <th>İncele</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,6 +31,7 @@
                             <td>@city.Name</td>
                             <td>@city.CountryId</td>
                             <td><a class="btn btn-outline-warning text-warning" asp-controller="City" asp-action="Update" asp-route-id="@city.Id">Update</a></td>
+                            <td><a class="btn btn-outline-primary" asp-controller="City" asp-action="Details" asp-route-id="@city.Id">İncele</a></td>
                         </tr>
                     }
                 </tbody>

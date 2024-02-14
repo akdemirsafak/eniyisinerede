@@ -1,4 +1,5 @@
-﻿using eniyisinerede.webui.Services.Interfaces;
+﻿using AutoMapper;
+using eniyisinerede.webui.Services.Interfaces;
 using eniyisinerede.webui.ViewModels.Products;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,28 +8,31 @@ namespace eniyisinerede.webui.Controllers;
 public class ProductController : Controller
 {
     private readonly IProductService _productService;
+    private readonly IMapper _mapper;
 
-    public ProductController(IProductService productService)
+    public ProductController(IProductService productService, IMapper mapper)
     {
         _productService = productService;
+        _mapper = mapper;
     }
     public async Task<IActionResult> Index()
     {
-        var datas =await _productService.GetAllAsync();
-        return View(datas);
+        var products =await _productService.GetAllAsync();
+        return View(products);
     }
     public async Task<IActionResult> List()
     {
-        var datas =await _productService.GetAllAsync();
-        return View(datas);
+        var products =await _productService.GetAllAsync();
+        return View(products);
     }
 
     public async Task<IActionResult> Details(Guid id)
     {
-        var data = await _productService.GetAsync(id);
-        if (data == null)
-            return RedirectToAction(nameof(Index));
-        return View(data);
+        var product = await _productService.GetAsync(id);
+        if (product is not null)
+            return View(product);
+
+        return RedirectToAction(nameof(Index));
     }
 
     //Create
@@ -40,8 +44,12 @@ public class ProductController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(CreateProductViewModel createProductViewModel)
     {
-        var result = await _productService.CreateAsync(createProductViewModel);
-        return RedirectToAction(nameof(Index));
+        var product = await _productService.CreateAsync(createProductViewModel);
+        if (product is not null)
+            return RedirectToAction(nameof(Details), new { id = product.Id });
+
+        return View(createProductViewModel);
+
     }
 
     //Update
@@ -49,21 +57,16 @@ public class ProductController : Controller
     public async Task<IActionResult> Update(Guid id)
     {
         var data = await _productService.GetAsync(id);
-        var updateProductViewModel = new UpdateProductViewModel
-        {
-            Id = data.Id,
-            Name = data.Name,
-            Description = data.Description,
-            Price = data.Price,
-            PictureUrl = data.PictureUrl
-        };
+        var updateProductViewModel = _mapper.Map<UpdateProductViewModel>(data);
         return View(updateProductViewModel);
     }
 
-    [HttpPut]
+    [HttpPost]
     public async Task<IActionResult> Update(UpdateProductViewModel updateProductViewModel)
     {
-        var result = await _productService.UpdateAsync(updateProductViewModel);
-        return RedirectToAction(nameof(Index));
+        var product = await _productService.UpdateAsync(updateProductViewModel);
+        if (product is not null)
+            return RedirectToAction(nameof(Details), new { id = product.Id });
+        return View(updateProductViewModel);
     }
 }

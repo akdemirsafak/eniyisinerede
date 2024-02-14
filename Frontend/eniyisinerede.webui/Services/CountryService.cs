@@ -1,9 +1,6 @@
 ﻿using eniyisinerede.webui.Services.Interfaces;
-using eniyisinerede.webui.ViewModels.Cities;
 using eniyisinerede.webui.ViewModels.Countries;
 using SharedLibrary.Dtos;
-using System.Text;
-using System.Text.Json;
 
 namespace eniyisinerede.webui.Services;
 
@@ -20,32 +17,29 @@ public class CountryService : ICountryService
 
     public async Task<CountryViewModel> CreateAsync(CreateCountryViewModel createCountryViewModel)
     {
-        var request= new HttpRequestMessage(HttpMethod.Post, "api/country");
-        var requestContent = new StringContent(JsonSerializer.Serialize(createCountryViewModel), Encoding.UTF8, "application/json");
-        var requestResult = await _httpClient.SendAsync(request);
-        if (requestResult.IsSuccessStatusCode)
-        {
-            var responseContent = await requestResult.Content.ReadAsStringAsync();
-            var countryViewModel = JsonSerializer.Deserialize<CountryViewModel>(responseContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-            return countryViewModel;
-        }
-        return null;
+
+        var clientResult=await _httpClient.PostAsJsonAsync("country", createCountryViewModel);
+        if (!clientResult.IsSuccessStatusCode)
+            return null;
+
+        var responseContent = await clientResult.Content.ReadFromJsonAsync<ApiResponse<CountryViewModel>>();
+
+        return responseContent.Data;
     }
 
     public async Task<bool> DeleteAsync(int countryId)
     {
-        var request = new HttpRequestMessage(HttpMethod.Delete, $"country/{countryId}");
-        var requestResult = await _httpClient.SendAsync(request);
+        var requestResponse= await _httpClient.DeleteAsync($"country/{countryId}");
 
-        if (!requestResult.IsSuccessStatusCode)
+        if (!requestResponse.IsSuccessStatusCode)
             return false;
 
-        var responseContent = await requestResult.Content.ReadAsStringAsync();
-        var response = JsonSerializer.Deserialize<ApiResponse<NoContent>>(responseContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        if (response.StatusCode == StatusCodes.Status204NoContent)
-            return true;
+        var responseContent = await requestResponse.Content.ReadFromJsonAsync<ApiResponse<NoContent>>();
 
-        return false;
+        if (responseContent.Errors is not null)
+            return false;
+
+        return true;
     }
 
 
@@ -71,17 +65,12 @@ public class CountryService : ICountryService
 
     public async Task<CountryViewModel> UpdateAsync(UpdateCountryViewModel updateCountryViewModel)
     {
-        var country = new CountryViewModel
-        {
-            Code = updateCountryViewModel.Code,
-            Name = updateCountryViewModel.Name
-        };
-        var request= await _httpClient.PutAsJsonAsync($"country/{updateCountryViewModel.Id}", country);
+        var request= await _httpClient.PutAsJsonAsync($"country/{updateCountryViewModel.Id}", updateCountryViewModel);
         if (!request.IsSuccessStatusCode)
             return null;
         var requestContent = await request.Content.ReadFromJsonAsync<ApiResponse<CountryViewModel>>();
 
-        if (requestContent.StatusCode != StatusCodes.Status200OK)
+        if (requestContent.Errors is not null)
             return null;
 
         return requestContent.Data;
