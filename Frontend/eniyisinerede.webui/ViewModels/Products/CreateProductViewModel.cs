@@ -13,6 +13,6 @@ public class CreateProductViewModel
     [Range(1, 10000)]
     [Display(Name = "Fiyat")]
     public decimal Price { get; set; }
-    [Display(Name = "Resim URL")]
-    public string? PictureUrl { get; set; }
+    [Display(Name = "Görsel")]
+    public IFormFile Picture { get; set; }
 }

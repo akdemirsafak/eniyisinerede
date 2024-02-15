@@ -13,8 +13,9 @@ public class ProductService : IProductService
         _httpClient = httpClient;
     }
 
-    public async Task<ProductViewModel> CreateAsync(CreateProductViewModel createProductViewModel)
+    public async Task<ProductViewModel> CreateAsync(ProductViewModel createProductViewModel)
     {
+
         var clientResult=await _httpClient.PostAsJsonAsync("product", createProductViewModel);
         if (!clientResult.IsSuccessStatusCode)
             return null;
@@ -56,7 +57,7 @@ public class ProductService : IProductService
         return productViewModel.Data;
     }
 
-    public async Task<ProductViewModel> UpdateAsync(UpdateProductViewModel updateProductViewModel)
+    public async Task<ProductViewModel> UpdateAsync(ProductViewModel updateProductViewModel)
     {
         var clientResult =await _httpClient.PutAsJsonAsync($"product/{updateProductViewModel.Id}", updateProductViewModel);
 

@@ -5,31 +5,32 @@
 
 <div class="container">
 
-<h2 class="text-center">Update Product</h2>
+    <h2 class="text-center">Update Product</h2>
 
-    <form method="post" asp-controller="Product" asp-action="Update">
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label"></label>
-        <input type="text" class="form-control" asp-for="Name">
-        <span asp-validation-for="Name" class="danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Description" class="form-label"></label>
-        <input type="text" class="form-control" asp-for="Description">
-        <span asp-validation-for="Description" class="danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Price" class="form-label"></label>
-        <input type="text" class="form-control" asp-for="Price">
-        <span asp-validation-for="Price" class="danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="PictureUrl" class="form-label"></label>
-        <input type="text" class="form-control" asp-for="PictureUrl">
-        <span asp-validation-for="Name" class="danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">güncelle</button>
-</form>
+    <form method="post" asp-controller="Product" asp-action="Update" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="Name">
+            <span asp-validation-for="Name" class="danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="Description">
+            <span asp-validation-for="Description" class="danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Price" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="Price">
+            <span asp-validation-for="Price" class="danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Picture" class="form-label"></label>
+            <input type="file" class="form-control" value="PictureUrl" asp-for="Picture">
+            <span asp-validation-for="Picture" class="danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">GÃ¼ncelle</button>
+    </form>
 
-    <a class="text-primary" asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id"> Güncellemeyi iptal et ve ürün bilgilerine geri dön.</a>
+    <a class="text-primary" asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id"> GÃ¼ncellemeyi iptal
+        et ve Ã¼rÃ¼n bilgilerine geri dÃ¶n.</a>
 </div>

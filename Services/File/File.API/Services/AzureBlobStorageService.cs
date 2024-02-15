@@ -59,7 +59,7 @@ public class AzureBlobStorageService(BlobServiceClient _blobServiceClient) : IAz
     public async Task<BlobResponseDto> UploadAsync(IFormFile blob, string containerName)
     {
         var blobContainer = _blobServiceClient.GetBlobContainerClient(containerName);
-        blobContainer.CreateIfNotExists(PublicAccessType.Blob);
+        blobContainer.CreateIfNotExists(PublicAccessType.BlobContainer);
 
         var file = blobContainer.GetBlobClient(blob.FileName);
         await using var data= blob.OpenReadStream();
