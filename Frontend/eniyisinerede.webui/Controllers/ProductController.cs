@@ -8,12 +8,14 @@ namespace eniyisinerede.webui.Controllers;
 public class ProductController : Controller
 {
     private readonly IProductService _productService;
+    private readonly IImageService _imageService;
     private readonly IMapper _mapper;
 
-    public ProductController(IProductService productService, IMapper mapper)
+    public ProductController(IProductService productService, IMapper mapper, IImageService imageService)
     {
         _productService = productService;
         _mapper = mapper;
+        _imageService = imageService;
     }
     public async Task<IActionResult> Index()
     {
@@ -44,7 +46,13 @@ public class ProductController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(CreateProductViewModel createProductViewModel)
     {
-        var product = await _productService.CreateAsync(createProductViewModel);
+        var pictureUrl= await _imageService.UploadAsync(createProductViewModel.Picture);
+
+        var productViewModel = _mapper.Map<ProductViewModel>(createProductViewModel);
+        productViewModel.PictureUrl = pictureUrl;
+
+
+        var product = await _productService.CreateAsync(productViewModel);
         if (product is not null)
             return RedirectToAction(nameof(Details), new { id = product.Id });
 
@@ -64,7 +72,12 @@ public class ProductController : Controller
     [HttpPost]
     public async Task<IActionResult> Update(UpdateProductViewModel updateProductViewModel)
     {
-        var product = await _productService.UpdateAsync(updateProductViewModel);
+        var pictureUrl = await _imageService.UploadAsync(updateProductViewModel.Picture);
+
+        var productViewModel = _mapper.Map<ProductViewModel>(updateProductViewModel);
+        productViewModel.PictureUrl = pictureUrl;
+
+        var product = await _productService.UpdateAsync(productViewModel);
         if (product is not null)
             return RedirectToAction(nameof(Details), new { id = product.Id });
         return View(updateProductViewModel);

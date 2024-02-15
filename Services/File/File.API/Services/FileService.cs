@@ -15,7 +15,7 @@ public class FileService(IAzureBlobStorageService _azureBlobStorageService) : IF
     {
         var response = await _azureBlobStorageService.DownloadAsync(fileName, containerName);
         if (response == null)
-            return ApiResponse<BlobDto>.Fail("File not found",404);
+            return ApiResponse<BlobDto>.Fail("File not found", 404);
         return ApiResponse<BlobDto>.Success(response);
     }
 

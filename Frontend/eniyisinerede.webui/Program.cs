@@ -55,6 +55,14 @@ builder.Services.AddHttpClient<IDistrictService, DistrictService>(options =>
 {
     options.BaseAddress = new Uri("https://localhost:5011/api/");
 });
+builder.Services.AddHttpClient<IFileService, FileService>(options =>
+{
+    options.BaseAddress = new Uri("https://localhost:5014/api/");
+});
+builder.Services.AddHttpClient<IImageService, ImageService>(options =>
+{
+    options.BaseAddress = new Uri("https://localhost:5014/api/");
+});
 
 
 
