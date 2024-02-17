@@ -1,0 +1,6 @@
+@eniyisiNeredeGateway_HostAddress = http://localhost:5071
+
+GET {{eniyisiNeredeGateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
