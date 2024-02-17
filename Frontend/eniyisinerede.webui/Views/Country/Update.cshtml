@@ -4,9 +4,7 @@
 @model UpdateCountryViewModel
 
 
-
 <div class="container">
-
     <h2 class="text-center">Update Country</h2>
     <form method="post" asp-controller="Country" asp-action="Update">
         <div asp-validation-summary="ModelOnly" class="alert alert-warning"></div>
@@ -23,7 +21,11 @@
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
         <a class="text-primary" asp-controller="Country" asp-action="Details" asp-route-id="@Model.Id">Güncellemeyi İptal et ve ülke bilgilerine dön.</a>
-
     </form>
-
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

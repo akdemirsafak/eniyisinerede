@@ -32,3 +32,9 @@
     <a class="text-primary" asp-controller="Product" asp-action="Index">Cancel and return to the product list</a>
 
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

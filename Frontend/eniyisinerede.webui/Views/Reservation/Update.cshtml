@@ -33,9 +33,13 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
-        
         </div>
     </div>
     <a class="text-primary" asp-controller="Reservation" asp-action="Details" asp-route-id="@Model.Id">Güncellemeyi iptal et ve rezervasyon detaylarına dön</a>
 </div>
 
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

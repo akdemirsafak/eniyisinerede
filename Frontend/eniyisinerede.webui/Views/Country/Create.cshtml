@@ -24,3 +24,8 @@
     </form>
     <a class="text-primary" asp-controller="Country" asp-action="Index">İptal et ve ülke listesine dön</a>
 </div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
