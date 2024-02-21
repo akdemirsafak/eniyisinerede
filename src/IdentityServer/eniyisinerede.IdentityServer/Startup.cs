@@ -2,9 +2,10 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using IdentityServer4;
 using eniyisinerede.IdentityServer.Data;
 using eniyisinerede.IdentityServer.Models;
+using eniyisinerede.IdentityServer.Services;
+using IdentityServer4;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -12,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using eniyisinerede.IdentityServer.Services;
 
 namespace eniyisinerede.IdentityServer
 {
@@ -52,6 +52,9 @@ namespace eniyisinerede.IdentityServer
                 options.EmitStaticAudienceClaim = true;
             })
                 .AddInMemoryIdentityResources(Config.IdentityResources)
+
+                .AddInMemoryApiResources(Config.ApiResources) //Resource'ları eklemeyi unuttuğumuz için invalid signature jwt hatası almıştık.!
+
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients)
                 .AddAspNetIdentity<ApplicationUser>();
@@ -65,7 +68,7 @@ namespace eniyisinerede.IdentityServer
                 .AddGoogle(options =>
                 {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-                    
+
                     // register your IdentityServer with Google at https://console.developers.google.com
                     // enable the Google+ API
                     // set the redirect URI to https://localhost:5001/signin-google
@@ -86,6 +89,9 @@ namespace eniyisinerede.IdentityServer
 
             app.UseRouting();
             app.UseIdentityServer();
+
+            app.UseAuthentication();
+
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
