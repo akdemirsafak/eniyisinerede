@@ -5,7 +5,6 @@ using SharedLibrary.Controllers;
 
 namespace Product.API.Controllers;
 
-
 public class ProductController : CustomBaseController
 {
     private readonly IProductService _productService;

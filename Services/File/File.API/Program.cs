@@ -11,10 +11,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-builder.Services.AddSingleton<IAzureBlobStorageService, AzureBlobStorageService>();
-builder.Services.AddSingleton<IFileService, FileService>();
+//builder.Services.AddSingleton<IAzureBlobStorageService, AzureBlobStorageService>();
+//builder.Services.AddSingleton<IFileService, FileService>();
 
-builder.Services.AddSingleton(new BlobServiceClient(builder.Configuration.GetValue<string>("AzureBlobStorageConnectionString")));
+//builder.Services.AddSingleton(new BlobServiceClient(builder.Configuration.GetValue<string>("AzureBlobStorageConnectionString")));
 
 var app = builder.Build();
 
