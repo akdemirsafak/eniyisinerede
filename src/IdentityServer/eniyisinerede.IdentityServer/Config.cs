@@ -82,15 +82,15 @@ namespace eniyisinerede.IdentityServer
                     AllowedScopes={
                         "fileapi_fullpermission",
                         "gateway_fullpermission",
+                        "reservation_fullpermission",
+                        "reservation_readpermission",
+                        "reservation_writepermission",
                         IdentityServerConstants.StandardScopes.Email,
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.LocalApi.ScopeName, //API'ın kendisine istek yapabilmek için
                         IdentityServerConstants.StandardScopes.OfflineAccess,//Refresh token dönebilmemiz için OfflineAccess'de ekledik.
-                        "roles",
-                        "reservation_fullpermission",
-                        "reservation_readpermission",
-                        "reservation_writepermission"
+                        "roles"
                     },
                     AccessTokenLifetime=60*60, //1 Saat
                     RefreshTokenUsage=TokenUsage.ReUse,
