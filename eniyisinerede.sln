@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.override.yml = docker-compose.override.yml
 		docker-compose.yml = docker-compose.yml
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eniyisinerede.IdentityServer", "src\IdentityServer\eniyisinerede.IdentityServer\eniyisinerede.IdentityServer.csproj", "{A6A539D8-AF11-4865-9A85-0C505617C990}"
@@ -33,7 +34,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eniyisinerede.webui", "Fron
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "File.API", "Services\File\File.API\File.API.csproj", "{0624737C-391E-483F-A4E5-7D92E2473548}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eniyisiNeredeGateway", "Gateways\eniyisiNeredeGateway\eniyisiNeredeGateway.csproj", "{99E79377-F910-44A0-BCBF-50B4FB35DB82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eniyisiNeredeGateway", "Gateways\eniyisiNeredeGateway\eniyisiNeredeGateway.csproj", "{99E79377-F910-44A0-BCBF-50B4FB35DB82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
