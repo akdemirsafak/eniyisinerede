@@ -14,15 +14,13 @@ builder.Services.AddAuthentication()
     {
         opt.Authority = builder.Configuration["IdentityServerURL"];
         opt.Audience = "gateway_resource";
-        opt.RequireHttpsMetadata = false;
+        opt.RequireHttpsMetadata = true;
     });
 
+builder.Services.AddHttpContextAccessor();
 
 builder.Services
     .AddOcelot();
-
-
-builder.Services.AddHttpContextAccessor();
 
 builder.Configuration.AddJsonFile($"configuration.{builder.Environment.EnvironmentName}.json")
 
@@ -38,6 +36,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthorization();
 
 await app.UseOcelot();
 app.Run();

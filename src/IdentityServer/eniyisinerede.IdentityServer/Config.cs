@@ -27,13 +27,13 @@ namespace eniyisinerede.IdentityServer
 
         }; // audience'lara karşılık gelecek.
         public static IEnumerable<IdentityResource> IdentityResources =>
-                   new IdentityResource[]
-                   {
-                        new IdentityResources.OpenId(),//kullanıcının id email ve password gönderildiğinde jwt almak istiyorsak mutlaka token içerisinde(jwt payloadında) subject keyword'ünün dolu olması gerekir.OpenId mutlaka olmalı OpenIdConnect Protocol'ünün zorunlu kıldığı alandır
-                        new IdentityResources.Profile(),//kullanıcı profil bilgileri address vs
-                        new IdentityResources.Email(),
-                        new IdentityResource(){ Name="roles",DisplayName="Roles" ,Description="Kullanıcı rolleri",UserClaims=new[]{ "role"} } //Kendi claim'imizi oluşturuyoruz yukarıdakiler hazır claimler
-                   };
+            new IdentityResource[]
+            {
+                new IdentityResources.OpenId(),//kullanıcının id email ve password gönderildiğinde jwt almak istiyorsak mutlaka token içerisinde(jwt payloadında) subject keyword'ünün dolu olması gerekir.OpenId mutlaka olmalı OpenIdConnect Protocol'ünün zorunlu kıldığı alandır
+                new IdentityResources.Profile(),//kullanıcı profil bilgileri address vs
+                new IdentityResources.Email(),
+                new IdentityResource(){ Name="roles",DisplayName="Roles" ,Description="Kullanıcı rolleri",UserClaims=new[]{ "role"} } //Kendi claim'imizi oluşturuyoruz yukarıdakiler hazır claimler
+            };
 
         public static IEnumerable<ApiScope> ApiScopes =>
             new ApiScope[]
@@ -72,6 +72,7 @@ namespace eniyisinerede.IdentityServer
                     AccessTokenLifetime=30*24*60*60, //30 gün
                     RefreshTokenUsage=TokenUsage.OneTimeOnly
                 },
+
                 new Client()
                 {
                     ClientName="Asp.Net Core MVC",

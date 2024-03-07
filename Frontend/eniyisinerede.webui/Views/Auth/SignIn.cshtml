@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+@model SignInInputModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <form asp-controller="Auth" asp-action="SignIn" method="post">
+                <div class="mb-3">
+                    <label asp-for="Username" class="form-label"></label>
+                    <input type="text" class="form-control" asp-for="Username">
+                    <span asp-validation-for="Username" class="danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input type="text" class="form-control" asp-for="Password">
+                    <span asp-validation-for="Password" class="danger"></span>
+                </div>
+                <div class="mb-3">
+                    <input type="checkbox" class="form-check-input" asp-for="RememberMe">
+                    <label class="form-check-label" asp-for="RememberMe"></label>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
