@@ -25,7 +25,7 @@ public static class HttpClientServiceExtension
         //Place
         serviceCollection.AddHttpClient<IPlaceService, PlaceService>(options =>
         {
-            options.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Location}");
+            options.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Place}");
         }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
         //---Location
