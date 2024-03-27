@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "İlçeler";
+}
+@model List<DistrictViewModel>
+
+
+<div class="container">
+    <div class="row">
+        <h3>Districts here</h3>
+
+        <div class="d-block my-2">
+            <a class="btn btn-primary float-end" asp-controller="District" asp-action="Create">Create District</a>
+        </div>
+
+        @if (Model.Any())
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>ZipCode</th>
+                        <th>City</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var district in Model)
+                    {
+                        <tr>
+                            <td>@district.Id</td>
+                            <td>@district.Name</td>
+                            <td>@district.ZipCode</td>
+                            <td>@district.CityId</td>
+                            <td><a class="btn btn-primary" asp-controller="District" asp-action="Details"
+                                    asp-route-id="@district.Id">İncele</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="bg-danger">No districts found</p>
+        }
+    </div>
+</div>

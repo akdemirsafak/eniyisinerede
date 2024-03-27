@@ -1,0 +1,23 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Product Details";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">@Model.Name</h5>
+                </div>
+                <div class="card-body">
+                    <img src="@Model.PictureUrl" alt="" class="card-img-top img-fluid" style="width:350px;height:350px;">
+                    <p class="card-text">@Model.Description</p>
+                    <h6 class="text-primary">@Model.Price</h6>
+                </div>
+                <a class="btn btn-warning mb-3" asp-controller="Product" asp-action="Update" asp-route-id="@Model.Id">Ürünü güncelleyin.</a>
+            </div>
+
+            <a class="text-primary float-end" asp-controller="Product" asp-action="Index"> Geri dön ve tümünü görüntüle</a>
+        </div>
+    </div>
+</div>

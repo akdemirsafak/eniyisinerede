@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Details";
+}
+@model CountryViewModel
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@Model.Name</h5>
+            <p class="card-text">@Model.Code</p>
+            <a class="btn btn-primary" asp-controller="Country" asp-action="Update" asp-route-id="@Model.Id">Güncelle</a>
+
+        </div>
+    </div>
+    <a class="text-primary" asp-controller="Country" asp-action="Index">Geri dön ve tümünü görüntüle</a>
+
+</div>

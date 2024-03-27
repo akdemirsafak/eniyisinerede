@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "City Details";
+}
+@model CityViewModel
+
+<div class="container">
+    <div class="row">
+        <h3>City Details</h3>
+        <div class="d-block my-2">
+            <a class="btn btn-primary float-end" asp-controller="City" asp-action="Index">Back to List</a>
+        </div>
+        <div>
+            City Name : @Model.Name
+            <hr />
+            Country Id :@Model.CountryId
+            <hr />
+            CountryName : @ViewBag.Country.Name
+        </div>
+    </div>
+</div>

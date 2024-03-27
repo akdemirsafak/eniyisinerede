@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Reservate";
+}
+@model CreateReservationViewModel
+
+<div class="container">
+
+    <h2 class="text-center">Create Reservation</h2>
+    <form method="post" asp-controller="Reservation" asp-action="Create">
+    
+        <div class="mb-3">
+            <select asp-for="PlaceId" asp-items="ViewBag.Places" class="form-control">
+                <option value="">Select an option</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DateAndTime" class="form-label"></label>
+            <input type="date" class="form-control" asp-for="DateAndTime">
+            <span asp-validation-for="DateAndTime" class="danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="NumberOfPerson" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="NumberOfPerson">
+            <span asp-validation-for="NumberOfPerson" class="danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="PhoneNumber" class="form-label"></label>
+            <input type="tel" class="form-control" asp-for="PhoneNumber">
+            <span asp-validation-for="PhoneNumber" class="danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Notes" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="Notes">
+            <span asp-validation-for="Notes" class="danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <a asp-controller="Reservation" asp-action="Index">Back to List</a>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
