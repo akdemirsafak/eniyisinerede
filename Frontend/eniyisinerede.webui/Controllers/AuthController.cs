@@ -27,7 +27,7 @@ public class AuthController : Controller
     public async Task<IActionResult> SignIn(SignInInputModel signInInputModel)
     {
         var response = await _identityService.SignInAsync(signInInputModel);
-        if (response.Errors.Any())
+        if (response.Errors is not null)
         {
             response.Errors.ForEach(error => { ModelState.AddModelError(String.Empty, error); });
             return View();
@@ -41,5 +41,21 @@ public class AuthController : Controller
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme); //Cookie'leri siliyoruz.
         await _identityService.RevokeRefreshToken();
         return RedirectToAction(nameof(HomeController.Index), "Home");
+    }
+
+    public  IActionResult SignUp()
+    {
+        return View();
+    }
+    [HttpPost]
+    public async Task<IActionResult> SignUp(SignUpInputModel signUpInputModel)
+    {
+        var result=await _identityService.SignUpAsync(signUpInputModel);
+        if (result.StatusCode!=201)
+        {
+            ModelState.AddModelError(String.Empty, "Bir hata meydana geldi.");
+            return View();
+        }
+        return RedirectToAction(nameof(UserController),nameof(Index));
     }
 }

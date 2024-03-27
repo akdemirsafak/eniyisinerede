@@ -14,7 +14,7 @@ public class UserService : IUserService
 
     public async Task<UserViewModel> GetUserAsync()
     {
-        return await _httpClient.GetFromJsonAsync<UserViewModel>("/api/user/getuser"); //casesensitive değildir. BURASI IDENTITYSERVER4 CONTROLLER'DA BELIRLEDIGIMIZ ENDPOINT
+        return await _httpClient.GetFromJsonAsync<UserViewModel>("/api/user"); //casesensitive değildir. BURASI IDENTITYSERVER4 CONTROLLER'DA BELIRLEDIGIMIZ ENDPOINT
         //Burada req. token eklemedik.Bunun yerine handle edeceğiz ve otomatik eklemesini sağlayacağız.
     }
 }

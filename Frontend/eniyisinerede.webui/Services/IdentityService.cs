@@ -2,14 +2,14 @@
 using eniyisinerede.webui.Settings;
 using eniyisinerede.webui.ViewModels.Auth;
 using IdentityModel.Client;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using SharedLibrary.Dtos;
 using System.Globalization;
 using System.Security.Claims;
 using System.Text.Json;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace eniyisinerede.webui.Services;
 
@@ -184,5 +184,14 @@ public class IdentityService : IIdentityService
         await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, authenticationProperties);
 
         return ApiResponse<bool>.Success(200);
+    }
+
+    public async Task<ApiResponse<bool>> SignUpAsync(SignUpInputModel signUpInputModel)
+    {
+        var requestResponse = await _httpClient.PostAsJsonAsync("api/auth", signUpInputModel);
+        if (!requestResponse.IsSuccessStatusCode)
+            return ApiResponse<bool>.Fail("İstek server'a iletilemedi.",(int)requestResponse.StatusCode);
+
+        return ApiResponse<bool>.Success(201);
     }
 }
